@@ -1,14 +1,17 @@
 package com.wanxp.blog.controller;
 
+import com.wanxp.blog.extension.markdown.MarkDownTranslator;
 import com.wanxp.blog.model.dto.*;
 import com.wanxp.blog.service.ContentServiceI;
 import com.wanxp.blog.model.vo.ContentVO;
+import com.wanxp.blog.util.MyBeanUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +26,7 @@ import java.lang.reflect.InvocationTargetException;
  * @author John
  * 
  */
-@RestController
+@Controller
 @RequestMapping(value = "/content")
 public class ContentController extends BaseController {
 
@@ -114,8 +117,11 @@ public class ContentController extends BaseController {
 	@GetMapping("/viewpage/{id}")
 	public String view(HttpServletRequest request, @PathVariable Integer id) {
 		ContentDTO content = contentService.get(id);
+		ContentVO contentVO = new ContentVO();
+		MyBeanUtils.copyProperties(content, contentVO);
+		contentVO.setContent(MarkDownTranslator.handle(content.getContent()));
 		request.setAttribute("content", content);
-		return "/content/viewpage";
+		return "/themes/default/content/viewpage";
 	}
 
 	/**

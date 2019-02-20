@@ -120,8 +120,8 @@ public class ContentController extends BaseController {
 		ContentVO contentVO = new ContentVO();
 		MyBeanUtils.copyProperties(content, contentVO);
 		contentVO.setContent(MarkDownTranslator.handle(content.getContent()));
-		request.setAttribute("content", content);
-		return "/themes/default/content/viewpage";
+		request.setAttribute("content", contentVO);
+		return "content/viewpage";
 	}
 
 	/**

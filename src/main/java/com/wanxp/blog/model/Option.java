@@ -13,7 +13,7 @@ import java.util.Date;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "option")
+@Table(name = "optionTest")
 @DynamicInsert(true)
 @DynamicUpdate(true)
 public class Option implements java.io.Serializable,IEntity{

@@ -1,11 +1,13 @@
 package com.wanxp.blog.service.impl;
 
-import com.wanxp.blog.dao.UserRepository;
+import com.wanxp.blog.repostory.UserRepository;
 import com.wanxp.blog.model.User;
 import com.wanxp.blog.model.dto.UserDTO;
-import com.wanxp.blog.service.UserServiceI;
+import com.wanxp.blog.service.UserService;
+import com.wanxp.blog.util.UserUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -15,7 +17,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserServiceI {
+public class UserServiceImpl implements UserService {
+
+    @Value("${LOGIN_NAME}")
+    private String cacheNameSpaceForLogin;
 
 	@Autowired
 	private UserRepository repostory;
@@ -60,5 +65,15 @@ public class UserServiceImpl implements UserServiceI {
     @Override
     public void delete(Integer id) {
         repostory.deleteById(id);
+    }
+
+    public UserDTO login(UserDTO userDTO){
+        User user = repostory.findByUsername(userDTO.getUsername());
+        if (!UserUtils.comparePassword(userDTO, user)) {
+            return null;
+        }
+        BeanUtils.copyProperties(user, userDTO);
+        userDTO.setPassword(null);
+        return userDTO;
     }
 }

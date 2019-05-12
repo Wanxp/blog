@@ -1,5 +1,7 @@
 package com.wanxp.blog.model.dto;
 
+import org.springframework.data.domain.Page;
+
 import java.util.Date;
 
 @SuppressWarnings("serial")
@@ -29,6 +31,7 @@ public class ContentDTO implements java.io.Serializable {
 	private Integer allowComment;
 	private Integer allowPing;
 	private Integer allowFeed;
+	private Page<CommentDTO> commentPage;
 
 	
 
@@ -189,4 +192,11 @@ public class ContentDTO implements java.io.Serializable {
 		return this.allowFeed;
 	}
 
+	public Page<CommentDTO> getCommentPage() {
+		return commentPage;
+	}
+
+	public void setCommentPage(Page<CommentDTO> commentPage) {
+		this.commentPage = commentPage;
+	}
 }

@@ -2,7 +2,7 @@ package com.wanxp.blog.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.wanxp.blog.model.dto.*;
-import com.wanxp.blog.service.CommentServiceI;
+import com.wanxp.blog.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,7 +25,7 @@ import java.util.List;
 public class CommentController extends BaseController {
 
 	@Autowired
-	private CommentServiceI commentService;
+	private CommentService commentService;
 
 
 	/**

@@ -1,9 +1,10 @@
 package com.wanxp.blog.service.impl;
 
-import com.wanxp.blog.dao.ContentRepository;
+import com.wanxp.blog.repostory.ContentRepository;
 import com.wanxp.blog.model.Content;
 import com.wanxp.blog.model.dto.ContentDTO;
-import com.wanxp.blog.service.ContentServiceI;
+import com.wanxp.blog.service.CommentService;
+import com.wanxp.blog.service.ContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
@@ -14,10 +15,13 @@ import java.util.List;
 import static org.springframework.beans.BeanUtils.copyProperties;
 
 @Service
-public class ContentServiceImpl implements ContentServiceI {
+public class ContentServiceImpl implements ContentService {
 
 	@Autowired
 	private ContentRepository repostory;
+
+	@Autowired
+    private CommentService commentService;
 
     @Override
     public Page<ContentDTO> queryInPage(Pageable pa) {
@@ -64,6 +68,15 @@ public class ContentServiceImpl implements ContentServiceI {
     @Override
     public void delete(Integer id) {
         repostory.deleteById(id);
+    }
+
+    @Override
+    public ContentDTO getAndCommentPage(Integer id, Pageable pageable) {
+        ContentDTO contentDTO = get(id);
+        if (contentDTO == null)
+            return null;
+        contentDTO.setCommentPage(commentService.getCommentPageByContentIdPageable(contentDTO.getId(), pageable));
+        return contentDTO;
     }
 
 }

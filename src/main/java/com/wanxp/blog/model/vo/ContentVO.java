@@ -1,6 +1,7 @@
 package com.wanxp.blog.model.vo;
 
-import com.wanxp.blog.constant.ICON;
+import com.wanxp.blog.constant.Icon;
+import org.springframework.data.domain.Page;
 
 import java.util.Date;
 
@@ -33,6 +34,7 @@ public class ContentVO implements java.io.Serializable {
 	private Integer allowFeed;
 	private String iconClassName;
 	private String url;
+	private Page<CommentVO> commentPage;
 
 	
 
@@ -194,7 +196,7 @@ public class ContentVO implements java.io.Serializable {
 	}
 
 	public String getIconClassName() {
-		return ICON.getICON(this.categories).getIconClassName();
+		return Icon.getICON(this.categories).getIconClassName();
 	}
 
 	public String getUrl() {
@@ -203,5 +205,13 @@ public class ContentVO implements java.io.Serializable {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public Page<CommentVO> getCommentPage() {
+		return commentPage;
+	}
+
+	public void setCommentPage(Page<CommentVO> commentPage) {
+		this.commentPage = commentPage;
 	}
 }

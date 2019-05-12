@@ -13,7 +13,7 @@
                         <div class="item-thumb bg-deepgrey" th:style="'background-image:url(' + ${content.thumbImg} + ');'"></div>
                         <a th:href="'/content/viewpage/' + ${content.id}">
                             <div class="item-desc">
-                                <p th:text="${content.content} + '...'"></p>
+                                <p th:utext="${content.content} + '...'"></p>
                             </div>
                         </a>
                         <div class="item-slant reverse-slant bg-deepgrey"></div>

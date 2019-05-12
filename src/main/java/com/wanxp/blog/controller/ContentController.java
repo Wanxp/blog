@@ -2,8 +2,10 @@ package com.wanxp.blog.controller;
 
 import com.wanxp.blog.extension.markdown.MarkDownTranslator;
 import com.wanxp.blog.model.dto.*;
-import com.wanxp.blog.service.ContentServiceI;
+import com.wanxp.blog.model.vo.CommentVO;
+import com.wanxp.blog.service.ContentService;
 import com.wanxp.blog.model.vo.ContentVO;
+import com.wanxp.blog.service.UserService;
 import com.wanxp.blog.util.MyBeanUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
@@ -31,7 +34,10 @@ import java.lang.reflect.InvocationTargetException;
 public class ContentController extends BaseController {
 
 	@Autowired
-	private ContentServiceI contentService;
+	private ContentService contentService;
+
+	@Autowired
+	private UserService userService;
 
 
 	/**
@@ -116,9 +122,22 @@ public class ContentController extends BaseController {
 	 */
 	@GetMapping("/viewpage/{id}")
 	public String view(HttpServletRequest request, @PathVariable Integer id) {
-		ContentDTO content = contentService.get(id);
+		//TODO test login_user
+		HttpSession session = request.getSession();
+		UserDTO userDTO = new UserDTO();
+		userDTO.setUsername("wanxp123456");
+		userDTO.setPassword("123456789");
+		userDTO = userService.login(userDTO);
+		session.setAttribute("login_user", userDTO);
+
+		ContentDTO content = contentService.getAndCommentPage(id, PageRequest.of(0, 6, Sort.Direction.DESC, "updatetime"));
 		ContentVO contentVO = new ContentVO();
 		MyBeanUtils.copyProperties(content, contentVO);
+		contentVO.setCommentPage(content.getCommentPage().map((dto) -> {
+			CommentVO vo = new CommentVO();
+			BeanUtils.copyProperties(dto, vo);
+			return vo;
+		}));
 		contentVO.setContent(MarkDownTranslator.handle(content.getContent()));
 		request.setAttribute("content", contentVO);
 		return "content/viewpage";
@@ -132,6 +151,7 @@ public class ContentController extends BaseController {
 	@GetMapping("/editpage/{id}")
 	public String editPage(HttpServletRequest request, @PathVariable Integer id) {
 		ContentDTO content = contentService.get(id);
+
 		request.setAttribute("content", content);
 		return "/content/contentEdit";
 	}

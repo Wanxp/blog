@@ -1,9 +1,9 @@
 package com.wanxp.blog.service.impl;
 
-import com.wanxp.blog.dao.MetaRepository;
+import com.wanxp.blog.repostory.MetaRepository;
 import com.wanxp.blog.model.Meta;
 import com.wanxp.blog.model.dto.MetaDTO;
-import com.wanxp.blog.service.MetaServiceI;
+import com.wanxp.blog.service.MetaService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class MetaServiceImpl implements MetaServiceI {
+public class MetaServiceImpl implements MetaService {
 
 	@Autowired
 	private MetaRepository repostory;

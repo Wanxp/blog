@@ -1,18 +1,18 @@
 package com.wanxp.blog.extension.markdown;
 
 import com.wanxp.blog.constant.BlogConst;
-import org.pegdown.PegDownProcessor;
+import com.youbenzi.mdtool.tool.MDTool;
+//import org.pegdown.PegDownProcessor;
 import org.springframework.util.StringUtils;
 
-import java.util.Collections;
-import java.util.List;
 
 public class MarkDownTranslator {
     public static String handle(String markdown) {
         if (StringUtils.isEmpty(markdown)) {
             return "";
         }
-        String content = new PegDownProcessor().markdownToHtml(markdown);
+//        String content = new PegDownProcessor().markdownToHtml(markdown);
+        String content = MDTool.markdown2Html(markdown);
 
 
         // 支持网易云音乐输出

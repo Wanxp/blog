@@ -2,8 +2,9 @@ package com.wanxp.blog.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.wanxp.blog.model.dto.*;
-import com.wanxp.blog.service.AttachServiceI;
+import com.wanxp.blog.service.AttachService;
 import com.wanxp.blog.model.vo.AttachVO;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
@@ -26,7 +28,7 @@ import java.util.List;
 public class AttachController extends BaseController {
 
     @Autowired
-    private AttachServiceI attachService;
+    private AttachService attachService;
 
 
     /**
@@ -38,7 +40,15 @@ public class AttachController extends BaseController {
     public String manager(HttpServletRequest request) {
         return "/attach/attach";
     }
-
+    /**
+	 * 跳转到error管理页面
+	 * 
+	 * @return
+	 */
+	@GetMapping("/error")
+	public String error() {
+		return "/comm/error_500";
+	}
     /**
      * 获取Attach数据表格
      *

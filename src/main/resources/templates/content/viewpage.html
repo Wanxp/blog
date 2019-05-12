@@ -1,18 +1,30 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<header>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</header>
 <div th:replace="/partial/header :: header"></div>
 <article class="main-content page-page">
     <div class="post-header">
-        <h1 class="post-title" itemprop="name headline" th:text="${content.title}"></h1>
+        <h1 class="post-title" itemprop="name headline" >
+            <a th:href="|/content/viewpage/${content.id}|" th:text="${content.title}" text="">标题忙着找正文...</a>
+        </h1>
         <div class="post-data">
-            <time th:datetime="${content.created}" itemprop="datePublished" th:text="${content.created}"> </time>
+            <!--<time th:datetime="${content.created}" itemprop="datePublished" th:text="${content.created}"> </time>-->
+            <span th:text="|发布于${#calendars.format(content.updatetime, 'yyyy-MM-dd')}|">发表的那天</span>/
+            <span >
+                <a th:href="|/category/${content.categories}|" th:text="${content.categories}"></a>
+            </span>/
+            <span>
+                <a th:href="|${'#'}comments|" th:text="|${content.commentsNum}评论|">评论</a>
+            </span>/
+            <span th:text="|${content.hits}浏览|">浏览</span>
         </div>
     </div>
-    <div id="post-content" class="post-content">${content.content}</div>
+    <div id="post-content" class="post-content" itemprop="articleBody" >
+        <p class="post-tags" >
+            <a th:each="tag : ${#strings.arraySplit(content.tags,',')}" th:href="|/tag/${tag}|" th:text="${tag}"> </a>
+        </p>
+        [(${content.content})]
+    </div>
 </article>
-<!--<div th:replace="/partial/comments :: comments"></div>-->
+<div th:replace="/partial/comments :: comments"></div>
 <div th:replace="/partial/footer :: footer"></div>
 </html>

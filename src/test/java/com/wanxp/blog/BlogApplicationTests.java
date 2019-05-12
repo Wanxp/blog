@@ -1,9 +1,10 @@
 package com.wanxp.blog;
 
 import com.alibaba.fastjson.JSONObject;
-import com.wanxp.blog.dao.ContentRepository;
-import com.wanxp.blog.model.Attach;
+import com.wanxp.blog.repostory.ContentRepository;
 import com.wanxp.blog.model.Content;
+import com.wanxp.blog.model.vo.UserVO;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +12,19 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Slf4j
 public class BlogApplicationTests {
+
 
     @Autowired
     private ContentRepository repository;
@@ -57,6 +65,19 @@ public class BlogApplicationTests {
 
         List<Content> contents = repository.findAll(PageRequest.of(0,10)).getContent();
         System.out.println(contents);
+    }
+
+    @Test
+    public void testValidation() {
+        UserVO userVO = new UserVO();
+        ValidatorFactory validateFactory = Validation.buildDefaultValidatorFactory();
+        Validator validator = validateFactory.getValidator();
+        Set<ConstraintViolation<UserVO>> validateResult = validator.validate(userVO);
+        StringBuilder messageBuilder = new StringBuilder("");
+        for (ConstraintViolation<UserVO> constraintViolation : validateResult) {
+            messageBuilder.append(constraintViolation.getMessage()).append("\n");
+        }
+        log.info("validate UserVO message : {}", messageBuilder.toString());
     }
 
 }

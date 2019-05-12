@@ -1,9 +1,9 @@
 package com.wanxp.blog.service.impl;
 
-import com.wanxp.blog.dao.OptionRepository;
+import com.wanxp.blog.repostory.OptionRepository;
 import com.wanxp.blog.model.Option;
 import com.wanxp.blog.model.dto.OptionDTO;
-import com.wanxp.blog.service.OptionServiceI;
+import com.wanxp.blog.service.OptionService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class OptionServiceImpl implements OptionServiceI {
+public class OptionServiceImpl implements OptionService {
 
     @Autowired
     private OptionRepository repostory;

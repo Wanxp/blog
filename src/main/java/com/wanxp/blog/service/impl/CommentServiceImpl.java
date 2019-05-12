@@ -1,9 +1,9 @@
 package com.wanxp.blog.service.impl;
 
-import com.wanxp.blog.dao.CommentRepository;
+import com.wanxp.blog.repostory.CommentRepository;
 import com.wanxp.blog.model.Comment;
 import com.wanxp.blog.model.dto.CommentDTO;
-import com.wanxp.blog.service.CommentServiceI;
+import com.wanxp.blog.service.CommentService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class CommentServiceImpl implements CommentServiceI {
+public class CommentServiceImpl implements CommentService {
 
 	@Autowired
 	private CommentRepository repostory;
@@ -75,6 +75,17 @@ public class CommentServiceImpl implements CommentServiceI {
     @Override
     public void delete(Integer id) {
         repostory.deleteById(id);
+    }
+
+    @Override
+    public Page<CommentDTO> getCommentPageByContentIdPageable(Integer contentId, Pageable pageable) {
+        Page<Comment> commentPage = repostory.findByCid(contentId, pageable);
+        System.out.println(commentPage.getContent().toString());
+        return commentPage.map((comment) -> {
+            CommentDTO commentDTO = new CommentDTO();
+            BeanUtils.copyProperties(comment, commentDTO);
+            return commentDTO;
+        });
     }
 
 }

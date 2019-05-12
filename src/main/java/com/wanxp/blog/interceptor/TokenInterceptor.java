@@ -71,15 +71,17 @@ public class TokenInterceptor implements HandlerInterceptor {
 		String contextPath = request.getContextPath();
 		String url = requestUri.substring(contextPath.length());
 
-		if (url.indexOf("/baseController/") > -1 || excludeUrls.contains(url)) {// 如果要访问的资源是不需要验证的
+		if (url.indexOf("/baseController/") > -1 || (excludeUrls!=null && excludeUrls.contains(url))) {// 如果要访问的资源是不需要验证的
 			return true;
 		}
 
 		String tokenId = request.getParameter(TokenManage.TOKEN_FIELD);
-		if(F.empty(tokenId) || !tokenManage.validToken(tokenId)) {
-			request.getRequestDispatcher("/api/apiCommon/error").forward(request, response);
+		tokenManage = new TokenManage();
+		/*if(F.empty(tokenId) || !tokenManage.validToken(tokenId)) {
+			//request.getRequestDispatcher("/api/apiCommon/error").forward(request, response);
+			response.sendRedirect("/base/error");
 			return false;
-		}
+		}*/
 
 		if (url.indexOf("/api/apiCommon/validToken") > -1) {
 			return true;
@@ -107,10 +109,10 @@ public class TokenInterceptor implements HandlerInterceptor {
 //		System.out.println("param:" + param);
 //		System.out.println("sign:" + sign);
 //		System.out.println("MD5Util.md5:" + MD5Util.md5(URLEncoder.encode(param + tokenId, "UTF-8").replaceAll("[+]", "%20")));
-		if (F.empty(sign) || !sign.equals(MD5Util.md5(URLEncoder.encode(param + tokenId, "UTF-8").replaceAll("[+]", "%20")))) {
+		/*if (F.empty(sign) || !sign.equals(MD5Util.md5(URLEncoder.encode(param + tokenId, "UTF-8").replaceAll("[+]", "%20")))) {
 			request.getRequestDispatcher("/api/apiCommon/error").forward(request, response);
 			return false;
-		}
+		}*/
 
 		return true;
 	}

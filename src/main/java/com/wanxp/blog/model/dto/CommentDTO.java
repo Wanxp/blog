@@ -1,6 +1,8 @@
 package com.wanxp.blog.model.dto;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @SuppressWarnings("serial")
 public class CommentDTO implements java.io.Serializable {
@@ -24,7 +26,8 @@ public class CommentDTO implements java.io.Serializable {
 	private String content;
 	private String type;
 	private String status;
-	private Integer parent;
+	private CommentDTO parent;
+    private Set<CommentDTO> children;
 
 	
 
@@ -149,12 +152,19 @@ public class CommentDTO implements java.io.Serializable {
 	public String getStatus() {
 		return this.status;
 	}
-	public void setParent(Integer parent) {
+	public void setParent(CommentDTO parent) {
 		this.parent = parent;
 	}
 	
-	public Integer getParent() {
+	public CommentDTO getParent() {
 		return this.parent;
 	}
 
+    public Set<CommentDTO> getChildren() {
+        return children;
+    }
+
+    public void setChildren(Set<CommentDTO> children) {
+        this.children = children;
+    }
 }

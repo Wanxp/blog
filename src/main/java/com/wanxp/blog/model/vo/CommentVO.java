@@ -1,6 +1,8 @@
 package com.wanxp.blog.model.vo;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @SuppressWarnings("serial")
 public class CommentVO implements java.io.Serializable {
@@ -24,7 +26,8 @@ public class CommentVO implements java.io.Serializable {
 	private String content;
 	private String type;
 	private String status;
-	private Integer parent;
+	private CommentVO parent;
+	private Set<CommentVO> children;
 
 	
 
@@ -149,12 +152,19 @@ public class CommentVO implements java.io.Serializable {
 	public String getStatus() {
 		return this.status;
 	}
-	public void setParent(Integer parent) {
+	public void setParent(CommentVO parent) {
 		this.parent = parent;
 	}
 	
-	public Integer getParent() {
+	public CommentVO getParent() {
 		return this.parent;
 	}
 
+    public Set<CommentVO> getChildren() {
+        return children;
+    }
+
+    public void setChildren(Set<CommentVO> children) {
+        this.children = children;
+    }
 }

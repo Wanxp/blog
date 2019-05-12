@@ -8,6 +8,7 @@ package com.wanxp.blog.model;
 import javax.persistence.*;
 
 import java.util.Date;
+import java.util.Set;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -83,7 +84,10 @@ public class Comment implements java.io.Serializable,IEntity{
 	//@Length(max=16)
 	private String status;
 	//
-	private Integer parent;
+	private Comment parent;
+
+
+    private Set<Comment> children;
 	//columns END
 
 
@@ -250,15 +254,28 @@ public class Comment implements java.io.Serializable,IEntity{
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
-	@Column(name = "parent", unique = false, nullable = true, insertable = true, updatable = true, length = 10)
-	public Integer getParent() {
+
+	@ManyToOne
+	@JoinColumn(name = "parent", unique = false, nullable = true, insertable = true, updatable = true)
+	public Comment getParent() {
 		return this.parent;
 	}
 	
-	public void setParent(Integer parent) {
+	public void setParent(Comment parent) {
 		this.parent = parent;
 	}
+
+	@OneToMany
+    @JoinColumn(name = "parent", unique = false, nullable = true, insertable = true, updatable = true)
+    public Set<Comment> getChildren() {
+            return children;
+    }
+
+    public void setChildren(Set<Comment> children) {
+        this.children = children;
+    }
+
+
 	
 	
 	/*

@@ -1,9 +1,9 @@
 package com.wanxp.blog.service.impl;
 
-import com.wanxp.blog.dao.ContentMetaRelationshipRepository;
+import com.wanxp.blog.repostory.ContentMetaRelationshipRepository;
 import com.wanxp.blog.model.ContentMetaRelationship;
 import com.wanxp.blog.model.dto.ContentMetaRelationshipDTO;
-import com.wanxp.blog.service.ContentMetaRelationshipServiceI;
+import com.wanxp.blog.service.ContentMetaRelationshipService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ContentMetaRelationshipServiceImpl  implements ContentMetaRelationshipServiceI {
+public class ContentMetaRelationshipServiceImpl  implements ContentMetaRelationshipService {
 
 	@Autowired
 	private ContentMetaRelationshipRepository repostory;

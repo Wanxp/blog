@@ -4,11 +4,13 @@ import com.wanxp.blog.interceptor.TokenManage;
 import com.wanxp.blog.model.dto.ColumDTO;
 import com.wanxp.blog.model.dto.SessionInfo;
 import com.wanxp.blog.util.Objectx;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -68,7 +71,15 @@ public abstract class BaseController extends Objectx {
 		 */
 		//binder.registerCustomEditor(String.class, new StringEscapeEditor(true, true));
 	}
-
+	/**
+	 * 跳转到error管理页面
+	 * 
+	 * @return
+	 */
+	@GetMapping("/error")
+	public String error() {
+		return "/admin/attach";
+	}
 //	/**
 //	 * 用户跳转JSP页面
 //	 *

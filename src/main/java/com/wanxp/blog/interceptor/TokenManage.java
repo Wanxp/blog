@@ -54,6 +54,7 @@ public class TokenManage {
     }
 
     public boolean validToken(String tid) {
+    	System.out.println("validtoken" + tid);
         if (TokenManage.DEFAULT_TOKEN.equals(tid)) return true;
 
         boolean flag = redisUserService.getToken(tid) == null ? false : true;

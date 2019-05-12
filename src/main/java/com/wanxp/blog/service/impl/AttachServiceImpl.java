@@ -1,9 +1,9 @@
 package com.wanxp.blog.service.impl;
 
-import com.wanxp.blog.dao.AttachRepostory;
+import com.wanxp.blog.repostory.AttachRepostory;
 import com.wanxp.blog.model.Attach;
 import com.wanxp.blog.model.dto.AttachDTO;
-import com.wanxp.blog.service.AttachServiceI;
+import com.wanxp.blog.service.AttachService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class AttachServiceImpl implements AttachServiceI {
+public class AttachServiceImpl implements AttachService {
 
 	@Autowired
 	private AttachRepostory repostory;

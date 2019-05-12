@@ -1,47 +1,60 @@
 package com.wanxp.blog.controller;
 
+import com.wanxp.blog.extension.markdown.MarkDownTranslator;
 import com.wanxp.blog.model.dto.CommentDTO;
 import com.wanxp.blog.model.dto.ContentDTO;
+import com.wanxp.blog.model.dto.ContentListDTO;
 import com.wanxp.blog.model.vo.CommentVO;
 import com.wanxp.blog.model.vo.ContentVO;
-import com.wanxp.blog.service.CommentServiceI;
-import com.wanxp.blog.service.ContentServiceI;
+import com.wanxp.blog.service.CommentService;
+import com.wanxp.blog.service.ContentListService;
+import com.wanxp.blog.service.ContentService;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping
 public class IndexController extends BaseController{
 
     @Autowired
-    private ContentServiceI contentService;
+    private ContentService contentService;
 
     @Autowired
-    private CommentServiceI commentService;
+    private ContentListService contentListService;
+    @Autowired
+    private CommentService commentService;
 
-    @GetMapping( "/")
+    @GetMapping( "/index")
     public String index(Model model) throws IOException {
         PageRequest pageRequest = PageRequest.of(0, 10, Sort.Direction.DESC, "updatetime");
         Page contentPage = contentService.queryInPage(pageRequest);
+        List<ContentListDTO> contentList=contentListService.queryInPage(pageRequest);
         List<ContentDTO> contentDTOList = contentPage.getContent();
         List<ContentVO> contentVOS = new ArrayList<>();
         if (contentDTOList != null && !contentDTOList.isEmpty()) {
             contentDTOList.stream().forEach(contentDTO -> {
                 ContentVO contentVO = new ContentVO();
                 BeanUtils.copyProperties(contentDTO, contentVO);
+                contentVO.setContent(MarkDownTranslator.handle(contentDTO.getContent()));
                 contentVOS.add(contentVO);
             });
         }
@@ -69,7 +82,6 @@ public class IndexController extends BaseController{
             });
         }
 
-
         model.addAttribute("contentList", contentVOS);
         model.addAttribute("lastCommentList", commentVOS);
         model.addAttribute("lastContentList", contentVOS2);
@@ -77,5 +89,21 @@ public class IndexController extends BaseController{
         model.addAttribute("title", "sYsBlog");
         return "/index";
     }
-
+    @RequestMapping("/online")
+    @ResponseBody
+    public String number(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse){
+        try{  //把sessionId记录在浏览器
+            Cookie c = new Cookie("JSESSIONID", URLEncoder.encode(httpServletRequest.getSession().getId(), "utf-8"));
+            c.setPath("/");
+            //先设置cookie有效期为2天，不用担心，session不会保存2天
+            c.setMaxAge( 48*60 * 60);
+            httpServletResponse.addCookie(c);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+ 
+        HttpSession session = httpServletRequest.getSession();
+        Object count=session.getServletContext().getAttribute("count");
+        return "count : "+count;
+    }
 }

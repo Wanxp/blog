@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<header>
+
+</header>
+<body>
+<div class="main-content index-page clearfix" th:fragment="pagelist">
+    <div class="post-lists">
+        <div class="post-lists-body">
+            <div th:each="content : ${contentList}">
+                <div class="post-list-item">
+                    <div class="post-list-item-container">
+                        <div class="item-thumb bg-deepgrey" th:style="'background-image:url(' + ${content.thumbImg} + ');'"></div>
+                        <a th:href="'/content/viewpage/' + ${content.id}">
+                            <div class="item-desc">
+                                <p th:text="${content.content} + '...'"></p>
+                            </div>
+                        </a>
+                        <div class="item-slant reverse-slant bg-deepgrey"></div>
+                        <div class="item-slant"></div>
+                        <div class="item-label">
+                            <div class="item-title">
+                                <a th:href="'/content/viewpage/' + ${content.id}" th:text="${content.title}"></a>
+                            </div>
+                            <div class="item-meta clearfix">
+                                <div th:class="'item-meta-ico ' +  ${content.iconClassName}"
+                                     style="background: url(/img/bg-ico.png) no-repeat;background-size: 40px auto;"></div>
+                                <div class="item-meta-cat">
+                                    <span th:value="${content.categories}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

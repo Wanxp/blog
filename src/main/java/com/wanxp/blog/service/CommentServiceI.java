@@ -1,6 +1,6 @@
 package com.wanxp.blog.service;
 
-import com.wanxp.blog.dto.CommentDTO;
+import com.wanxp.blog.model.dto.CommentDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -10,6 +10,16 @@ import org.springframework.data.domain.Pageable;
  * 
  */
 public interface CommentServiceI {
+
+
+	/**
+	 * 获取Comment数据表格
+	 *
+	 * @param pa
+	 *            分页帮助类
+	 * @return
+	 */
+	public Page queryInPage(Pageable pa);
 
 	/**
 	 * 获取Comment数据表格

@@ -2,7 +2,7 @@ package com.wanxp.blog.service.impl;
 
 import com.wanxp.blog.dao.CommentRepository;
 import com.wanxp.blog.model.Comment;
-import com.wanxp.blog.dto.CommentDTO;
+import com.wanxp.blog.model.dto.CommentDTO;
 import com.wanxp.blog.service.CommentServiceI;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +19,21 @@ public class CommentServiceImpl implements CommentServiceI {
 
 	@Autowired
 	private CommentRepository repostory;
+
+    @Override
+    public Page<CommentDTO> queryInPage(Pageable pa) {
+        Page<Comment> p = repostory.findAll(pa);
+        List<CommentDTO> ds = new ArrayList<>();
+        if (p == null || p.getContent() == null)
+            return null;
+        p.getContent().stream().forEach(x -> {
+            CommentDTO d = new CommentDTO();
+            BeanUtils.copyProperties(x, d);
+            ds.add(d);
+        });
+        return new PageImpl<CommentDTO>(ds);
+    }
+
 
     @Override
     public Page<CommentDTO> queryInPage(CommentDTO dto, Pageable pa) {

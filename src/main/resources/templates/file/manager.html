@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script type="application/javascript">
+        function deleteFile(id) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById(id).remove();
+                }
+            };
+            xhttp.open("DELETE", "/file/" + id , true);
+            xhttp.send();
+        }
+    </script>
+</head>
+<body>
+<div th:if="${message}">
+    <h2 th:text="${message}"/>
+</div>
+
+<div>
+    <form method="POST" enctype="multipart/form-data" action="/file/">
+        <table>
+            <tr><td>File to upload:</td><td><input type="file" name="file" /></td></tr>
+            <tr><td></td><td><input type="submit" value="Upload" /></td></tr>
+        </table>
+
+    </form>
+    <form method="POST" enctype="multipart/form-data" action="/file/image/">
+        <table>
+            <tr><td>head picture to upload:</td><td><input type="file" name="file" /></td></tr>
+            <tr><td></td><td><input type="submit" value="Upload" /></td></tr>
+        </table>
+        <input type="hidden" name="filepath" value="/user/head/80/">
+
+    </form>
+</div>
+
+<div>
+    <table border="1">
+        <thead>
+        <tr>
+            <td>Name</td>
+            <td>ID</td>
+            <td>contentType</td>
+            <td>filepath</td>
+            <td>size</td>
+            <td>uploadDate</td>
+            <td>md5</td>
+            <td>action</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${files.size()} eq 0">
+            <td colspan="3">没有文件信息！！</td>
+        </tr>
+        <tr th:each="file : ${files}" th:id="${file.id}">
+            <td><a th:href="'view/'+${file.id}" th:text="${file.name}" /></td>
+            <td th:text="${file.id}" ></td>
+            <td th:text="${file.contentType}" ></td>
+            <td th:text="${file.path}" ></td>
+            <td th:text="${file.size}" ></td>
+            <td th:text="${file.uploadDate}" ></td>
+            <td th:text="${file.md5}" ></td>
+            <td >
+                <input type="button" name="delete" onclick="deleteFile(this.name)" value="delete" th:name="${file.id}" width="30"/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

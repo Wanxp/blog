@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<header>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</header>
+<div th:replace="/partial/header :: header"></div>
+<article class="main-content page-page">
+    <div class="post-header">
+        <h1 class="post-title" itemprop="name headline" th:text="${content.title}"></h1>
+        <div class="post-data">
+            <time th:datetime="${content.created}" itemprop="datePublished" th:text="${content.created}"> </time>
+        </div>
+    </div>
+    <div id="post-content" class="post-content">${content.content}</div>
+</article>
+<!--<div th:replace="/partial/comments :: comments"></div>-->
+<div th:replace="/partial/footer :: footer"></div>
+</html>

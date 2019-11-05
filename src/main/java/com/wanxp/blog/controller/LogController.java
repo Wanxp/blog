@@ -86,8 +86,8 @@ public class LogController extends BaseController {
 	 * @return
 	 */
 	@PostMapping("/add")
-	public Json add(LogDTO log) {
-		Json j = new Json();		
+	public PlatformResult add(LogDTO log) {
+		PlatformResult j = new PlatformResult();
 		logService.add(log);
 		j.setSuccess(true);
 		j.setMsg("添加成功！");		
@@ -125,8 +125,8 @@ public class LogController extends BaseController {
 	 * @return
 	 */
 	@PutMapping("/edit")
-	public Json edit(LogDTO log) {
-		Json j = new Json();		
+	public PlatformResult edit(LogDTO log) {
+		PlatformResult j = new PlatformResult();
 		logService.edit(log);
 		j.setSuccess(true);
 		j.setMsg("编辑成功！");		
@@ -140,8 +140,8 @@ public class LogController extends BaseController {
 	 * @return
 	 */
 	@DeleteMapping("/{id}")
-	public Json delete(@PathVariable Integer id) {
-		Json j = new Json();
+	public PlatformResult delete(@PathVariable Integer id) {
+		PlatformResult j = new PlatformResult();
 		logService.delete(id);
 		j.setMsg("删除成功！");
 		j.setSuccess(true);

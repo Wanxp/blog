@@ -86,8 +86,8 @@ public class MetaController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping("/add")
-	public Json add(MetaDTO meta) {
-		Json j = new Json();		
+	public PlatformResult add(MetaDTO meta) {
+		PlatformResult j = new PlatformResult();
 		metaService.add(meta);
 		j.setSuccess(true);
 		j.setMsg("添加成功！");		
@@ -125,8 +125,8 @@ public class MetaController extends BaseController {
 	 * @return
 	 */
 	@PutMapping("/edit")
-	public Json edit(MetaDTO meta) {
-		Json j = new Json();		
+	public PlatformResult edit(MetaDTO meta) {
+		PlatformResult j = new PlatformResult();
 		metaService.edit(meta);
 		j.setSuccess(true);
 		j.setMsg("编辑成功！");		
@@ -140,8 +140,8 @@ public class MetaController extends BaseController {
 	 * @return
 	 */
 	@DeleteMapping("/{id}")
-	public Json delete(@PathVariable Integer id) {
-		Json j = new Json();
+	public PlatformResult delete(@PathVariable Integer id) {
+		PlatformResult j = new PlatformResult();
 		metaService.delete(id);
 		j.setMsg("删除成功！");
 		j.setSuccess(true);

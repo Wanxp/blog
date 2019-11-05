@@ -10,7 +10,7 @@ package com.wanxp.blog.model.dto;
  * 
  */
 @SuppressWarnings("serial")
-public class Json implements java.io.Serializable {
+public class PlatformResult implements java.io.Serializable {
 
 	private boolean success = false;
 

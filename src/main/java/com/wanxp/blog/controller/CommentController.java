@@ -86,8 +86,8 @@ public class CommentController extends BaseController {
 	 * @return
 	 */
 	@PostMapping("/add")
-	public Json add(CommentDTO comment) {
-		Json j = new Json();		
+	public PlatformResult add(CommentDTO comment) {
+		PlatformResult j = new PlatformResult();
 		commentService.add(comment);
 		j.setSuccess(true);
 		j.setMsg("添加成功！");		
@@ -125,8 +125,8 @@ public class CommentController extends BaseController {
 	 * @return
 	 */
 	@PutMapping("/edit")
-	public Json edit(CommentDTO comment) {
-		Json j = new Json();		
+	public PlatformResult edit(CommentDTO comment) {
+		PlatformResult j = new PlatformResult();
 		commentService.edit(comment);
 		j.setSuccess(true);
 		j.setMsg("编辑成功！");		
@@ -140,8 +140,8 @@ public class CommentController extends BaseController {
 	 * @return
 	 */
 	@DeleteMapping("/{id}")
-	public Json delete(@PathVariable Integer id) {
-		Json j = new Json();
+	public PlatformResult delete(@PathVariable Integer id) {
+		PlatformResult j = new PlatformResult();
 		commentService.delete(id);
 		j.setMsg("删除成功！");
 		j.setSuccess(true);

@@ -99,8 +99,8 @@ public class AttachController extends BaseController {
      * @return
      */
     @PostMapping("/")
-    public Json add(@RequestBody AttachDTO attach) {
-        Json j = new Json();
+    public PlatformResult add(@RequestBody AttachDTO attach) {
+        PlatformResult j = new PlatformResult();
         attachService.add(attach);
         j.setSuccess(true);
         j.setMsg("添加成功！");
@@ -151,8 +151,8 @@ public class AttachController extends BaseController {
      * @return
      */
     @PutMapping("/")
-    public Json edit(AttachDTO attach) {
-        Json j = new Json();
+    public PlatformResult edit(AttachDTO attach) {
+        PlatformResult j = new PlatformResult();
         attachService.edit(attach);
         j.setSuccess(true);
         j.setMsg("编辑成功！");
@@ -166,8 +166,8 @@ public class AttachController extends BaseController {
      * @return
      */
     @DeleteMapping("/{id}")
-    public Json delete(@PathVariable Integer id) {
-        Json j = new Json();
+    public PlatformResult delete(@PathVariable Integer id) {
+        PlatformResult j = new PlatformResult();
         attachService.delete(id);
         j.setMsg("删除成功！");
         j.setSuccess(true);

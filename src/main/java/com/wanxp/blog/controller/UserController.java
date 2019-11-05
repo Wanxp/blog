@@ -91,8 +91,8 @@ public class UserController extends BaseController {
 	 * @return
 	 */
 	@PostMapping("/add")
-	public Json add(UserDTO user) {
-		Json j = new Json();		
+	public PlatformResult add(UserDTO user) {
+		PlatformResult j = new PlatformResult();
 		userService.add(user);
 		j.setSuccess(true);
 		j.setMsg("添加成功！");		
@@ -130,8 +130,8 @@ public class UserController extends BaseController {
 	 * @return
 	 */
 	@PutMapping("/edit")
-	public Json edit(UserDTO user) {
-		Json j = new Json();		
+	public PlatformResult edit(UserDTO user) {
+		PlatformResult j = new PlatformResult();
 		userService.edit(user);
 		j.setSuccess(true);
 		j.setMsg("编辑成功！");		
@@ -145,41 +145,14 @@ public class UserController extends BaseController {
 	 * @return
 	 */
 	@DeleteMapping("/{id}")
-	public Json delete(@PathVariable Integer id) {
-		Json j = new Json();
+	public PlatformResult delete(@PathVariable Integer id) {
+		PlatformResult j = new PlatformResult();
 		userService.delete(id);
 		j.setMsg("删除成功！");
 		j.setSuccess(true);
 		return j;
 	}
 
-	/**
-	 * 登录
-	 * @param user
-	 * @param request
-	 * @return
-	 */
-    @PostMapping("/login")
-    @ResponseBody
-    public Json login(@Validated({Login.class}) @RequestBody UserVO user, HttpServletRequest request) {
-		HttpSession session =  request.getSession();
-		UserDTO sessionUser = (UserDTO) session.getAttribute("user" );
-		Json json = new Json();
-        UserDTO userDTO = new UserDTO();
-		MyBeanUtils.copyProperties(user, userDTO);
-		userDTO = userService.login(userDTO) ;
-		if (userDTO == null) {
-			json.setMsg("username not exist or password wrong");
-			json.setSuccess(false);
-		}else {
-			if (sessionUser != null) {
-				session.setAttribute("user", userDTO);
-			}
-			json.setSuccess(true);
-			json.setMsg("success");
-			json.setObj(userDTO);
-		}
-        return json;
-    }
+
 
 }

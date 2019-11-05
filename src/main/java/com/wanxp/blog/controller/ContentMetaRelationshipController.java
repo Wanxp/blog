@@ -86,8 +86,8 @@ public class ContentMetaRelationshipController extends BaseController {
 	 * @return
 	 */
 	@PostMapping("/add")
-	public Json add(ContentMetaRelationshipDTO contentMetaRelationship) {
-		Json j = new Json();		
+	public PlatformResult add(ContentMetaRelationshipDTO contentMetaRelationship) {
+		PlatformResult j = new PlatformResult();
 		contentMetaRelationshipService.add(contentMetaRelationship);
 		j.setSuccess(true);
 		j.setMsg("添加成功！");		
@@ -125,8 +125,8 @@ public class ContentMetaRelationshipController extends BaseController {
 	 * @return
 	 */
 	@PutMapping("/edit")
-	public Json edit(ContentMetaRelationshipDTO contentMetaRelationship) {
-		Json j = new Json();		
+	public PlatformResult edit(ContentMetaRelationshipDTO contentMetaRelationship) {
+		PlatformResult j = new PlatformResult();
 		contentMetaRelationshipService.edit(contentMetaRelationship);
 		j.setSuccess(true);
 		j.setMsg("编辑成功！");		
@@ -140,8 +140,8 @@ public class ContentMetaRelationshipController extends BaseController {
 	 * @return
 	 */
 	@DeleteMapping("/{id}")
-	public Json delete(@PathVariable Integer id) {
-		Json j = new Json();
+	public PlatformResult delete(@PathVariable Integer id) {
+		PlatformResult j = new PlatformResult();
 		contentMetaRelationshipService.delete(id);
 		j.setMsg("删除成功！");
 		j.setSuccess(true);

@@ -86,8 +86,8 @@ public class OptionController extends BaseController {
 	 * @return
 	 */
 	@PostMapping("/add")
-	public Json add(OptionDTO option) {
-		Json j = new Json();		
+	public PlatformResult add(OptionDTO option) {
+		PlatformResult j = new PlatformResult();
 		optionService.add(option);
 		j.setSuccess(true);
 		j.setMsg("添加成功！");		
@@ -125,8 +125,8 @@ public class OptionController extends BaseController {
 	 * @return
 	 */
 	@PutMapping("/edit")
-	public Json edit(OptionDTO option) {
-		Json j = new Json();		
+	public PlatformResult edit(OptionDTO option) {
+		PlatformResult j = new PlatformResult();
 		optionService.edit(option);
 		j.setSuccess(true);
 		j.setMsg("编辑成功！");		
@@ -140,8 +140,8 @@ public class OptionController extends BaseController {
 	 * @return
 	 */
 	@DeleteMapping("/{id}")
-	public Json delete(@PathVariable Integer id) {
-		Json j = new Json();
+	public PlatformResult delete(@PathVariable Integer id) {
+		PlatformResult j = new PlatformResult();
 		optionService.delete(id);
 		j.setMsg("删除成功！");
 		j.setSuccess(true);

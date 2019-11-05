@@ -105,8 +105,8 @@ public class ContentController extends BaseController {
 	 * @return
 	 */
 	@PostMapping("/")
-	public Json add(@RequestBody ContentVO contentVO) {
-		Json j = new Json();
+	public PlatformResult add(@RequestBody ContentVO contentVO) {
+		PlatformResult j = new PlatformResult();
 		ContentDTO contentDTO = new ContentDTO();
         BeanUtils.copyProperties(contentVO, contentDTO);
 		contentService.add(contentDTO);
@@ -163,8 +163,8 @@ public class ContentController extends BaseController {
 	 * @return
 	 */
 	@PutMapping("/edit")
-	public Json edit(ContentDTO content) {
-		Json j = new Json();		
+	public PlatformResult edit(ContentDTO content) {
+		PlatformResult j = new PlatformResult();
 		contentService.edit(content);
 		j.setSuccess(true);
 		j.setMsg("编辑成功！");		
@@ -178,8 +178,8 @@ public class ContentController extends BaseController {
 	 * @return
 	 */
 	@DeleteMapping("/{id}")
-	public Json delete(@PathVariable Integer id) {
-		Json j = new Json();
+	public PlatformResult delete(@PathVariable Integer id) {
+		PlatformResult j = new PlatformResult();
 		contentService.delete(id);
 		j.setMsg("删除成功！");
 		j.setSuccess(true);

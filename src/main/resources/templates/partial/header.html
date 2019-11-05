@@ -36,6 +36,10 @@
                 <img src="/img/logo.png" th:alt="${title}"/>
         </a>
         <div class="navbar-menu">
+            <a href="/user/login/index">登录</a>
+            <a href="comments.html"
+               th:href="@{/admin/page(prodId=${prod.id})}"
+               th:if="${not #lists.isEmpty(prod.comments)}">登录</a>
             <a href="/index/archives">归档</a>
             <a href="/index/links">友链</a>
             <a href="/index/about">关于</a>
@@ -52,6 +56,7 @@
         <div class="navbar-mobile-menu" onclick="">
             <span class="icon-menu cross"><span class="middle"></span></span>
             <ul>
+                <a href="/user/login/index">登录</a>
                 <li><a href="/index/archives">归档</a></li>
                 <li><a href="/index/links">友链</a></li>
                 <li><a href="/index/about">关于</a></li>

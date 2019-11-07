@@ -1,18 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" >
 <head>
     <meta charset="utf-8"/>
-    <title>${title ?! '博客后台'} - Tale</title>
+    <title th:value="${title ? '博客后台': title }">博客后台</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <meta content="biezhi" name="author"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <link rel="shortcut icon" href="/static/admin/images/favicon.png"/>
-    #call cdn_url('header')
-    <link href="/static/admin/css/style.min.css?v=${version}" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" href="/admin/images/favicon.png"/>
+    <link href="/admin/css/style.min.css?v=${version}" rel="stylesheet" type="text/css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    #call cdn_url('html5_respond')
     <![endif]-->
 </head>
 <body class="fixed-left">
@@ -22,11 +20,11 @@
             <div class="text-center p-t-10" style="margin: 0 auto;">
                 <div class="pull-left" style="padding-left: 10px;">
                     <a href="/admin/index">
-                        <img src="/static/admin/images/unicorn.png" width="50" height="50"/>
+                        <img src="/admin/images/unicorn.png" width="50" height="50"/>
                     </a>
                 </div>
                 <div class="pull-left" style="padding-left: 10px;">
-                    <span style="font-size: 28px; color: #2f353f; line-height: 50px;">Tale Blog</span>
+                    <span style="font-size: 28px; color: #2f353f; line-height: 50px;">Blog</span>
                 </div>
             </div>
         </div>
@@ -45,10 +43,10 @@
                             <a href="index.html" class="dropdown-toggle profile" data-toggle="dropdown"
                                aria-expanded="true"><img src="${gravatar(login_user.email)}" alt="user-img" class="img-circle"> </a>
                             <ul class="dropdown-menu">
-                                <li><a href="${site_url()}" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i> 查看网站</a></li>
+                                <li><a th:href="${@components.site_url()}" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i> 查看网站</a></li>
                                 <li><a href="/admin/profile"><i class="fa fa-sun-o"></i> 个人设置</a></li>
                                 <!--<li><a href="/admin/reload"><i class="fa fa-sun"></i> 重启系统</a></li>-->
-                                <li><a href="/logout"><i class="fa fa-sign-out"></i> 注销</a></li>
+                                <li><a href="/login/logout"><i class="fa fa-sign-out"></i> 注销</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -100,12 +98,11 @@
                     <li #if(active=='setting') class="active" #end>
                         <a href="/admin/setting" class="waves-effect #if(active=='setting') active #end"><i class="fa fa-gear" aria-hidden="true"></i><span> 系统设置 </span></a>
                     </li>
-
-                    #for(item : plugin_menus)
+                    <div th:each="item : ${plugin_menus}">
                     <li #if(active==item.slug) class="active" #end>
-                        <a href="/admin/plugins/${item.slug}" class="waves-effect #if(active==item.slug) active #end"><i class="${item.icon ?! 'fa fa-gear'}" aria-hidden="true"></i><span> ${item.name} </span></a>
+                        <a th:href="/admin/plugins/${item.slug}" class="waves-effect #if(active==item.slug) active #end"><i th:class="${item.icon ? item.icon : 'fa fa-gear'}" class="fa fa-gear" aria-hidden="true"></i><span> ${item.name} </span></a>
                     </li>
-                    #end
+                    </div>
                 </ul>
                 <div class="clearfix"></div>
             </div>
@@ -115,3 +112,7 @@
     <div class="content-page">
         <div class="content">
             <div class="container">
+            </div>
+        </div>
+    </div>
+</div>

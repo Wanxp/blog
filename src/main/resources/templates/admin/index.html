@@ -1,7 +1,8 @@
-#include('./header.html',{active:'home', title:'管理中心'})
+<html xmlns:th="http://www.thymeleaf.org" >
+<div th:replace="/admin/header :: header"></div>
 <div class="row">
     <div class="col-sm-12">
-        <h4 class="page-title">Tale仪表盘</h4>
+        <h4 class="page-title">仪表盘</h4>
     </div>
 
     <div class="row">
@@ -41,13 +42,13 @@
                 </div>
                 <div class="panel-body">
                     <ul class="list-group">
-                        #for(article : articles)
-                        <li class="list-group-item">
-                            <span class="badge badge-primary"
-                                  title="${article.commentsNum}条评论">${article.commentsNum}</span>
-                            <a target="_blank" href="${site_url('/article/')}${article.cid}">${article.title}</a>
-                        </li>
-                        #end
+                        <div th:each="article : ${articles}">
+                            <li class="list-group-item">
+                                <span class="badge badge-primary"
+                                      th:title="${article.commentsNum}条评论" th:value=${article.commentsNum}""></span>
+                                <a target="_blank" th:href="${components.site_url('/article/')}${article.cid}">${article.title}</a>
+                            </li>
+                        </div>
                     </ul>
                 </div>
             </div>
@@ -58,24 +59,26 @@
                     <h4 class="panel-title">最新留言</h4>
                 </div>
                 <div class="panel-body">
-                    #if(null == comments || comments.size() == 0)
-                    <div class="alert alert-warning">
-                        还没有收到留言.
+                    <div th:if="null == ${comments} || ${comments.size} == 0">
+                        <div class="alert alert-warning">
+                            还没有收到留言.
+                        </div>
                     </div>
-                    #else
-                    <ul class="list-group">
-                        #for(comment : comments)
-                        <li class="list-group-item">
-                            #if(null != comment.url && comment.url != '')
-                            <a href="${comment.url}" target="_blank">${comment.author}</a>
-                            #else
-                            ${comment.author}
-                            #end
-                            于${fmtdate(comment.created,'MM月dd日HH:mm')} ：<a href="${site_url('/article/')}${comment.cid}#comments" target="_blank">${article(comment.content)}</a>
-                        </li>
-                        #end
-                    </ul>
-                    #end
+                    <div th:unless="null == ${comments} || ${comments.size} == 0">
+                        <ul class="list-group">
+                            <div th:each="comment : ${comments}">
+                                <li class="list-group-item">
+                                    <div th:if="null != ${comment.url} && ${comment.url} != ''">
+                                        <a th:href="${comment.url}" target="_blank">${comment.author}</a>
+                                        <div th:unless="null != ${comment.url} && ${comment.url} != ''" th:text="${comment.author}">
+                                        </div>
+                                        <label th:value="'于'+${components.fmtdate(comment.created,'MM月dd日HH:mm')}+' ：'"/>
+                                        <a th:href="@{${@components.site_url('/article/')} + ${comment.cid}}" target="_blank" th:text="${@components.article(comment.content)}"></a>
+                                    </div>
+                                </li>
+                            </div>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -86,17 +89,17 @@
                 </div>
                 <div class="panel-body">
                     <ul class="list-group">
-                        #for(log : logs)
-                        <li class="list-group-item">
-                            <span>${fmtdate(log.created, 'yyyy-MM-dd HH:mm:ss')} => ${log.action}</span>
-                        </li>
-                        #end
+                        <div th:each="log : ${logs}">
+                            <li class="list-group-item">
+                                <span th:text="${@components.fmtdate(log.created, 'yyyy-MM-dd HH:mm:ss')} + ' => ' + ${log.action}"></span>
+                            </li>
+                        </div>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 </div>
-#include('./footer.html')
+<div th:replace="/admin/footer :: footer"></div>
 </body>
 </html>

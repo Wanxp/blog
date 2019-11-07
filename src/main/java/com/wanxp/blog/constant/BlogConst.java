@@ -14,4 +14,9 @@ public class BlogConst {
     public static final String GIST_PREFIX_URL       = "https://gist.github.com/";
     public static final String GIST_REG_PATTERN      = "&lt;script src=\"https://gist.github.com/(\\w+)/(\\w+)\\.js\">&lt;/script>";
     public static final String GIST_REPLATE_PATTERN  = "<script src=\"https://gist.github.com/$1/$2\\.js\"></script>";
+
+
+
+    public static final String BLOG_TITLE = "博客";
+    public static final String SITE_URL = "http://localhost:9000/";
 }

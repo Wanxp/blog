@@ -20,44 +20,4 @@ public class AdminController {
     @Autowired
     private UserService userService;
 
-
-    /**
-     * 跳转到User管理页面
-     *
-     * @return
-     */
-    @GetMapping("/loginPage")
-    public String manager(HttpServletRequest request) {
-        return "/admin/loginPage";
-    }
-
-    /**
-     * 登录
-     * @param user
-     * @param request
-     * @return
-     */
-    @PostMapping("/login")
-    @ResponseBody
-    public PlatformResult login(@Validated({Login.class}) @RequestBody UserVO user, HttpServletRequest request) {
-        HttpSession session =  request.getSession();
-        UserDTO sessionUser = (UserDTO) session.getAttribute("user" );
-        PlatformResult json = new PlatformResult();
-        UserDTO userDTO = new UserDTO();
-        MyBeanUtils.copyProperties(user, userDTO);
-        userDTO = userService.login(userDTO) ;
-        if (userDTO == null) {
-            json.setMsg("username not exist or password wrong");
-            json.setSuccess(false);
-        }else {
-            if (sessionUser != null) {
-                session.setAttribute("user", userDTO);
-            }
-            json.setSuccess(true);
-            json.setMsg("success");
-            json.setObj(userDTO);
-        }
-        return json;
-    }
-
 }

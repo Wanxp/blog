@@ -113,6 +113,7 @@ $.tale.prototype.post = function (options) {
         url: options.url,
         data: options.data || {},
         async: options.async || false,
+        contentType:options.contentType ? options.contentType : 'application/json;charset=utf-8',
         dataType: 'json',
         success: function (result) {
             self.hideLoading();

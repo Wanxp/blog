@@ -71,10 +71,10 @@ $.tale.prototype.alertConfirm = function (options) {
  * 错误提示
  * @param options
  */
-$.tale.prototype.alertError = function (options) {
-    options = options.length ? {text: options} : ( options || {} );
-    options.title = options.title || '错误信息';
-    options.text = options.text;
+$.tale.prototype.alertError = function (msg) {
+    options = {};
+    options.title = '错误信息';
+    options.text = msg;
     options.type = 'error';
     this.alertBox(options);
 };
@@ -113,7 +113,7 @@ $.tale.prototype.post = function (options) {
         url: options.url,
         data: options.data || {},
         async: options.async || false,
-        contentType:options.contentType ? options.contentType : 'application/json;charset=utf-8',
+        // contentType:options.contentType ? options.contentType : 'application/json;charset=utf-8',
         dataType: 'json',
         success: function (result) {
             self.hideLoading();
@@ -142,3 +142,13 @@ $.tale.prototype.hideLoading = function () {
     $('#tale-loading') && $('#tale-loading').hide();
 };
 
+$.tale.prototype.formToJson = function ($form){
+    var unindexed_array = $form.serializeArray();
+    var indexed_array = {};
+
+    $.map(unindexed_array, function(n, i){
+        indexed_array[n['name']] = n['value'];
+    });
+    console.log(indexed_array);
+    return indexed_array;
+}

@@ -17,13 +17,6 @@ public class PlatformResult implements java.io.Serializable {
 	private String msg = "";
 
 	private Object obj = null;
-	
-	public void success(){
-		this.success = true;
-	}
-	public void fail(){
-		this.success = false;
-	}
 
 	public boolean isSuccess() {
 		return success;
@@ -49,4 +42,31 @@ public class PlatformResult implements java.io.Serializable {
 		this.obj = obj;
 	}
 
+	public static PlatformResult success() {
+		PlatformResult platformResult = new PlatformResult();
+		platformResult.setSuccess(Boolean.TRUE);
+		return platformResult;
+	}
+
+	public static PlatformResult success(Object o) {
+		PlatformResult platformResult = new PlatformResult();
+		platformResult.setSuccess(Boolean.TRUE);
+		platformResult.setObj(o);
+		return platformResult;
+	}
+
+	public static PlatformResult success(String message) {
+		PlatformResult platformResult = new PlatformResult();
+		platformResult.setSuccess(Boolean.TRUE);
+		platformResult.setMsg(message);
+		return platformResult;
+	}
+
+	public static PlatformResult success(Object o, String message) {
+		PlatformResult platformResult = new PlatformResult();
+		platformResult.setSuccess(Boolean.TRUE);
+		platformResult.setObj(o);
+		platformResult.setMsg(message);
+		return platformResult;
+	}
 }

@@ -23,11 +23,11 @@ public class UserServiceImpl implements UserService {
     private String cacheNameSpaceForLogin;
 
 	@Autowired
-	private UserRepository repostory;
+	private UserRepository userRepository;
 
     @Override
     public Page<UserDTO> queryInPage(UserDTO commentDTO, Pageable pa) {
-        Page<User> p = repostory.findAll(pa);
+        Page<User> p = userRepository.findAll(pa);
         List<UserDTO> ds = new ArrayList<>();
         if (p == null || p.getContent() == null)
             return null;
@@ -43,12 +43,12 @@ public class UserServiceImpl implements UserService {
     public void add(UserDTO dto) {
         User t = new User();
         BeanUtils.copyProperties(dto, t);
-        repostory.saveAndFlush(t);
+        userRepository.saveAndFlush(t);
     }
 
     @Override
     public UserDTO get(Integer id) {
-        User t = repostory.getOne(id);
+        User t = userRepository.getOne(id);
         UserDTO dto = new UserDTO();
         if (t != null)
             BeanUtils.copyProperties(t, dto);
@@ -59,16 +59,16 @@ public class UserServiceImpl implements UserService {
     public void edit(UserDTO dto) {
         User t = new User();
         BeanUtils.copyProperties(dto, t);
-        repostory.save(t);
+        userRepository.save(t);
     }
 
     @Override
     public void delete(Integer id) {
-        repostory.deleteById(id);
+        userRepository.deleteById(id);
     }
 
     public UserDTO login(UserDTO userDTO){
-        User user = repostory.findByUsername(userDTO.getUsername());
+        User user = userRepository.findByUsername(userDTO.getUsername());
         if (!UserUtils.comparePassword(userDTO, user)) {
             return null;
         }

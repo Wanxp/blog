@@ -33,9 +33,9 @@ public class LoginController {
      * @param request
      * @return
      */
-    @PostMapping()
+    @PostMapping
     @ResponseBody
-    public PlatformResult login(@Validated({Login.class}) @RequestBody UserVO user, HttpServletRequest request) {
+    public PlatformResult login(@Validated({Login.class}) @ModelAttribute("form") UserVO user, HttpServletRequest request) {
         HttpSession session =  request.getSession();
         UserDTO sessionUser = (UserDTO) session.getAttribute("user" );
         PlatformResult json = new PlatformResult();
@@ -49,9 +49,6 @@ public class LoginController {
             if (sessionUser != null) {
                 session.setAttribute("user", userDTO);
             }
-            json.setSuccess(true);
-            json.setMsg("success");
-            json.setObj(userDTO);
         }
         return json;
     }

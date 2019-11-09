@@ -17,12 +17,21 @@ public class ThymeleafComponent {
 
     public String fmtdate(Date date, String parttern) {
         //TODO
-        return "";
+        return "2019-11-11 11:10:10";
     }
 
     public String article(String content) {
         //TODO
-        return "";
+        return content;
 
+    }
+
+    public String gravatar(String str) {
+        //TODO
+        return str;
+    }
+
+    public String theme_url(String uri) {
+        return uri;
     }
 }

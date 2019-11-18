@@ -39,7 +39,7 @@ public class FileServiceImpl implements FileService {
         Page<File> page = null;
         List<File> list = null;
 
-        Sort sort = new Sort(Sort.Direction.DESC,"uploadDate");
+        Sort sort = Sort.by(Sort.Direction.DESC,"uploadDate");
         Pageable pageable = PageRequest.of(pageIndex, pageSize, sort);
 
         page = repository.findAll(pageable);

@@ -1,8 +1,6 @@
 package com.wanxp.blog.service;
 
-import com.wanxp.blog.model.Comment;
 import com.wanxp.blog.model.dto.CommentDTO;
-import com.wanxp.blog.model.vo.CommentList;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

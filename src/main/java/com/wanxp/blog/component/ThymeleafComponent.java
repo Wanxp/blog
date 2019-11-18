@@ -1,10 +1,13 @@
 package com.wanxp.blog.component;
 
 
+import org.springframework.stereotype.Component;
+
 import java.util.Date;
 
 import static com.wanxp.blog.constant.BlogConst.SITE_URL;
 
+@Component("customsComponent")
 public class ThymeleafComponent {
 
     public String site_url() {
@@ -33,5 +36,9 @@ public class ThymeleafComponent {
 
     public String theme_url(String uri) {
         return uri;
+    }
+
+    public String meta_description() {
+        return "";
     }
 }

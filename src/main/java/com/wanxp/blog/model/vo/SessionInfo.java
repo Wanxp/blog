@@ -8,7 +8,6 @@ import java.util.List;
  * @author John
  * 
  */
-@SuppressWarnings("serial")
 public class SessionInfo implements java.io.Serializable {
 
 	private String id;// 用户ID

@@ -1,5 +1,8 @@
 package com.wanxp.blog.model.vo;
 
+import lombok.Data;
+
+@Data
 public class ColumVO {
 	private String field;
 	private boolean hidden;

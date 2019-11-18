@@ -8,17 +8,17 @@
     <meta http-equiv="Cache-Control" content="no-transform"/>
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
     <meta name="keywords" th:content="${meta_keywords}"/>
-    <meta name="description" th:content="${components.meta_description()}"/>
+    <meta name="description" th:content="${@customsComponent.meta_description()}"/>
     <meta th:content="${_csrf_token}" name="csrf_token"/>
-    <link rel="shortcut icon" th:href="@{components.theme_url('/img/favicon.png')}" href="/img/favicon.png"/>
-    <link rel="apple-touch-icon" th:href="@{components.theme_url('/img/apple-touch-icon.png')}" href="/img/apple-touch-icon.png"/>
+    <link rel="shortcut icon" th:href="${@customsComponent.theme_url('/img/favicon.png')}" href="/img/favicon.png"/>
+    <link rel="apple-touch-icon" th:href="${@customsComponent.theme_url('/img/apple-touch-icon.png')}" href="/img/apple-touch-icon.png"/>
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <script th:src="@{components.theme_url('/js/highlight.min.js')}" src="/js/highlight.min.js"></script>
-    <script th:src="@{components.theme_url('/js/instantclick.min.js')}"  src="/js/instantclick.min.js'"></script>
+    <script th:src="${@customsComponent.theme_url('/js/highlight.min.js')}" src="/js/highlight.min.js"></script>
+    <script th:src="${@customsComponent.theme_url('/js/instantclick.min.js')}"  src="/js/instantclick.min.js'"></script>
     <script src="http://cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
     <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <link th:href="@{components.theme_url('/css/xcode.min.css')}" href="/css/xcode.min.css" rel="stylesheet">
-    <link th:href="@{components.theme_url('/css/style.min.css')}" href="/css/style.min.css" rel="stylesheet">
+    <link th:href="${@customsComponent.theme_url('/css/xcode.min.css')}" href="/css/xcode.min.css" rel="stylesheet">
+    <link th:href="${@customsComponent.theme_url('/css/style.min.css')}" href="/css/style.min.css" rel="stylesheet">
     <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.css">-->
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
@@ -36,7 +36,7 @@
                 <img src="/img/logo.png" th:alt="${title}"/>
         </a>
         <div class="navbar-menu">
-            <a href="/login/loginPage">登录</a>
+            <a href="/login">登录</a>
             <a href="/index/archives">归档</a>
             <a href="/index/links">友链</a>
             <a href="/index/about">关于</a>
@@ -53,7 +53,7 @@
         <div class="navbar-mobile-menu" onclick="">
             <span class="icon-menu cross"><span class="middle"></span></span>
             <ul>
-                <a href="/user/login/index">登录</a>
+                <a href="/user/login">登录</a>
                 <li><a href="/index/archives">归档</a></li>
                 <li><a href="/index/links">友链</a></li>
                 <li><a href="/index/about">关于</a></li>

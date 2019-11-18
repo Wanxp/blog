@@ -46,7 +46,7 @@
                             <li class="list-group-item">
                                 <span class="badge badge-primary"
                                       th:title="${article.commentsNum}条评论" th:value=${article.commentsNum}""></span>
-                                <a target="_blank" th:href="${components.site_url('/article/')}${article.cid}">${article.title}</a>
+                                <a target="_blank" th:href="${@customsComponent.site_url('/article/')}${article.cid}">${article.title}</a>
                             </li>
                         </div>
                     </ul>
@@ -72,8 +72,8 @@
                                         <a th:href="${comment.url}" target="_blank">${comment.author}</a>
                                         <div th:unless="null != ${comment.url} && ${comment.url} != ''" th:text="${comment.author}">
                                         </div>
-                                        <label th:value="'于'+${components.fmtdate(comment.created,'MM月dd日HH:mm')}+' ：'"/>
-                                        <a th:href="@{${@components.site_url('/article/')} + ${comment.cid}}" target="_blank" th:text="${@components.article(comment.content)}"></a>
+                                        <label th:value="'于'+${@customsComponent.fmtdate(comment.created,'MM月dd日HH:mm')}+' ：'"/>
+                                        <a th:href="@{${@customsComponent.site_url('/article/')} + ${comment.cid}}" target="_blank" th:text="${@customsComponent.article(comment.content)}"></a>
                                     </div>
                                 </li>
                             </div>
@@ -91,7 +91,7 @@
                     <ul class="list-group">
                         <div th:each="log : ${logs}">
                             <li class="list-group-item">
-                                <span th:text="${@components.fmtdate(log.created, 'yyyy-MM-dd HH:mm:ss')} + ' => ' + ${log.action}"></span>
+                                <span th:text="${@customsComponent.fmtdate(log.created, 'yyyy-MM-dd HH:mm:ss')} + ' => ' + ${log.action}"></span>
                             </li>
                         </div>
                     </ul>

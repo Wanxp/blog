@@ -12,7 +12,7 @@ package com.wanxp.blog.model.dto;
 @SuppressWarnings("serial")
 public class PlatformResult implements java.io.Serializable {
 
-	private boolean success = false;
+	private boolean success = true;
 
 	private String msg = "";
 

@@ -8,7 +8,7 @@
 
     <title>Wanxp - 用户登录</title>
     <link th:href="@{/plugins/limonte-sweetalert2/6.4.1/sweetalert2.min.css}" href="/plugins/limonte-sweetalert2/6.4.1/sweetalert2.min.css" rel="stylesheet" type="text/css"/>
-    <link th:href="@{components.theme_url('/css/style.min.css')}" href="/css/style.min.css"  rel="stylesheet" type="text/css">
+    <link th:href="${@customsComponent.theme_url('/css/style.min.css')}" href="/css/style.min.css"  rel="stylesheet" type="text/css">
     <style type="text/css">
         body,html {
             /*background: url([[@{/images/bg/${random(5, '.png')}}]]) no-repeat;*/
@@ -62,7 +62,7 @@
         </div>
 
         <div class="panel-body">
-            <form class="form-horizontal m-t-20" method="post" id="loginForm" onsubmit="return checkForm()">
+            <form class="form-horizontal m-t-20" method="post" id="loginForm"  onsubmit="return checkForm()">
 
                 <div class="form-group">
                     <div class="col-xs-12">
@@ -110,8 +110,8 @@
             data:$("#loginForm").serialize(),
             success: function (result) {
                 if (result && result.success) {
-                    // window.location.href = '/admin/index';
-                    console.log('1111111111111' + result.data);
+                    window.location.href = '/admin/index';
+                    // console.log('1111111111111' + result.data);
                 } else {
                     tale.alertError(result.msg || '登录失败');
                 }

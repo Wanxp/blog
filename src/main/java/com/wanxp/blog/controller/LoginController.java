@@ -22,9 +22,9 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("loginPage")
+    @GetMapping
     public String getLoginPage() {
-        return "user/loginPage";
+        return "user/login";
     }
 
     /**
@@ -34,8 +34,7 @@ public class LoginController {
      * @return
      */
     @PostMapping
-    @ResponseBody
-    public PlatformResult login(@Validated({Login.class}) @ModelAttribute("form") UserVO user, HttpServletRequest request) {
+    public String login(@Validated({Login.class}) @ModelAttribute("form") UserVO user, HttpServletRequest request) {
         HttpSession session =  request.getSession();
         UserDTO sessionUser = (UserDTO) session.getAttribute("user" );
         PlatformResult json = new PlatformResult();
@@ -50,7 +49,7 @@ public class LoginController {
                 session.setAttribute("user", userDTO);
             }
         }
-        return json;
+        return "redirect:admin/index";
     }
 
 }

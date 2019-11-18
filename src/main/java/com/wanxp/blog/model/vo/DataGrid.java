@@ -9,7 +9,6 @@ import java.util.List;
  * @author John
  * 
  */
-@SuppressWarnings("serial")
 public class DataGrid implements java.io.Serializable {
 
 	private Long total = 0L;

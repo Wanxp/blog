@@ -1,7 +1,7 @@
 package com.wanxp.blog.service.impl;
 
 import com.wanxp.blog.repostory.CommentRepository;
-import com.wanxp.blog.model.Comment;
+import com.wanxp.blog.model.entity.Comment;
 import com.wanxp.blog.model.dto.CommentDTO;
 import com.wanxp.blog.service.CommentService;
 import org.springframework.beans.BeanUtils;

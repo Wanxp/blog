@@ -7,17 +7,13 @@ import java.util.List;
 import java.util.Set;
 
 @Data
-public class CommentVO implements java.io.Serializable {
-
-	private static final long serialVersionUID = 5454155825314635342L;
-
+public class CommentVO {
 	private Integer id;
 	private Integer tenantId;
 	private Date addtime;			
 	private Date updatetime;			
 	private Boolean isdeleted;
 	private Integer cid;
-	private Integer created;
 	private String author;
 	private Integer authorId;
 	private Integer ownerId;

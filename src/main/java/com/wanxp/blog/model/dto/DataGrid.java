@@ -1,5 +1,7 @@
 package com.wanxp.blog.model.dto;
 
+import lombok.Data;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,37 +11,9 @@ import java.util.List;
  * @author John
  * 
  */
-@SuppressWarnings("serial")
-public class DataGrid implements java.io.Serializable {
-
+@Data
+public class DataGrid {
 	private Long total = 0L;
-	@SuppressWarnings("rawtypes")
 	private List rows = new ArrayList();
 	private List footer = new ArrayList();
-
-	public Long getTotal() {
-		return total;
-	}
-
-	public void setTotal(Long total) {
-		this.total = total;
-	}
-
-	@SuppressWarnings("rawtypes")
-	public List getRows() {
-		return rows;
-	}
-
-	@SuppressWarnings("rawtypes")
-	public void setRows(List rows) {
-		this.rows = rows;
-	}
-
-	public List getFooter() {
-		return footer;
-	}
-
-	public void setFooter(List footer) {
-		this.footer = footer;
-	}
 }

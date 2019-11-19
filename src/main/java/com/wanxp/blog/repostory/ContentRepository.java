@@ -1,6 +1,6 @@
 package com.wanxp.blog.repostory;
 
-import com.wanxp.blog.model.Content;
+import com.wanxp.blog.model.entity.Content;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

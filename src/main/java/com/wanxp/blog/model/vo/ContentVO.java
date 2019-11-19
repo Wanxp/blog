@@ -7,10 +7,7 @@ import org.springframework.data.domain.Page;
 import java.util.Date;
 
 @Data
-public class ContentVO implements java.io.Serializable {
-
-	private static final long serialVersionUID = 5454155825314635342L;
-
+public class ContentVO {
 	private Integer id;
 	private Integer tenantId;
 	private Date addtime;			
@@ -19,8 +16,6 @@ public class ContentVO implements java.io.Serializable {
 	private String title;
 	private String slug;
 	private String thumbImg;
-	private Integer created;
-	private Integer modified;
 	private String content;
 	private Integer authorId;
 	private String type;

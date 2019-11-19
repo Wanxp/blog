@@ -1,7 +1,7 @@
 package com.wanxp.blog.service.impl;
 
 import com.wanxp.blog.repostory.ContentListRepository;
-import com.wanxp.blog.model.ContentList;
+import com.wanxp.blog.model.entity.ContentList;
 import com.wanxp.blog.model.dto.ContentListDTO;
 import com.wanxp.blog.service.ContentListService;
 

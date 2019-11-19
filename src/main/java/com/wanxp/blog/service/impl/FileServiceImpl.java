@@ -1,6 +1,6 @@
 package com.wanxp.blog.service.impl;
 
-import com.wanxp.blog.model.File;
+import com.wanxp.blog.model.entity.File;
 import com.wanxp.blog.repostory.FileRepository;
 import com.wanxp.blog.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;

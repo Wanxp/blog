@@ -2,7 +2,7 @@ package com.wanxp.blog;
 
 import com.alibaba.fastjson.JSONObject;
 import com.wanxp.blog.repostory.ContentRepository;
-import com.wanxp.blog.model.Content;
+import com.wanxp.blog.model.entity.Content;
 import com.wanxp.blog.model.vo.UserVO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -40,8 +40,6 @@ public class BlogApplicationTests {
         content.setTitle("文章标题1:奔跑的猪");
         content.setSlug("slug");
         content.setThumbImg("http://pm6wq3fti.bkt.clouddn.com/==.jpg");
-        content.setCreated(11);
-        content.setModified(11);
         content.setContent("在太阳还未升起的那一刻,地球转不动了");
         content.setAuthorId(11);
         content.setType("FILE");

@@ -1,6 +1,6 @@
 package com.wanxp.blog.util;
 
-import com.wanxp.blog.model.User;
+import com.wanxp.blog.model.entity.User;
 import com.wanxp.blog.model.dto.UserDTO;
 import org.springframework.util.StringUtils;
 

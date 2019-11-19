@@ -1,7 +1,7 @@
 package com.wanxp.blog.service.impl;
 
 import com.wanxp.blog.repostory.MetaRepository;
-import com.wanxp.blog.model.Meta;
+import com.wanxp.blog.model.entity.Meta;
 import com.wanxp.blog.model.dto.MetaDTO;
 import com.wanxp.blog.service.MetaService;
 import org.springframework.beans.BeanUtils;

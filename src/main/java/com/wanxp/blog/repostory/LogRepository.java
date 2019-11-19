@@ -1,6 +1,6 @@
 package com.wanxp.blog.repostory;
 
-import com.wanxp.blog.model.Log;
+import com.wanxp.blog.model.entity.Log;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

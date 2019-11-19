@@ -1,7 +1,7 @@
 package com.wanxp.blog.service.impl;
 
 import com.wanxp.blog.repostory.ContentMetaRelationshipRepository;
-import com.wanxp.blog.model.ContentMetaRelationship;
+import com.wanxp.blog.model.entity.ContentMetaRelationship;
 import com.wanxp.blog.model.dto.ContentMetaRelationshipDTO;
 import com.wanxp.blog.service.ContentMetaRelationshipService;
 import org.springframework.beans.BeanUtils;

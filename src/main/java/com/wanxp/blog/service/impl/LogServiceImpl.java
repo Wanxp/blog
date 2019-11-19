@@ -1,7 +1,7 @@
 package com.wanxp.blog.service.impl;
 
 import com.wanxp.blog.repostory.LogRepository;
-import com.wanxp.blog.model.Log;
+import com.wanxp.blog.model.entity.Log;
 import com.wanxp.blog.model.dto.LogDTO;
 import com.wanxp.blog.service.LogService;
 import org.springframework.beans.BeanUtils;

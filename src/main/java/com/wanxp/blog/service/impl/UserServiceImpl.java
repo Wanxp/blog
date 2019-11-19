@@ -1,7 +1,7 @@
 package com.wanxp.blog.service.impl;
 
 import com.wanxp.blog.repostory.UserRepository;
-import com.wanxp.blog.model.User;
+import com.wanxp.blog.model.entity.User;
 import com.wanxp.blog.model.dto.UserDTO;
 import com.wanxp.blog.service.UserService;
 import com.wanxp.blog.util.UserUtils;

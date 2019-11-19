@@ -10,10 +10,7 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Data
-public class UserVO implements java.io.Serializable {
-
-	private static final long serialVersionUID = 5454155825314635342L;
-
+public class UserVO  {
 	private Integer id;
 	private Integer tenantId;
 	private Date addtime;			
@@ -27,7 +24,6 @@ public class UserVO implements java.io.Serializable {
 	private String email;
 	private String homeUrl;
 	private String screenName;
-	private Integer created;
 	private Integer activated;
 	private Integer logged;
 	private String groupName;

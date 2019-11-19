@@ -5,10 +5,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class LogVO implements java.io.Serializable {
-
-	private static final long serialVersionUID = 5454155825314635342L;
-
+public class LogVO {
 	private Integer id;
 	private Integer tenantId;
 	private Date addtime;			
@@ -18,5 +15,4 @@ public class LogVO implements java.io.Serializable {
 	private String data;
 	private Integer authorId;
 	private String ip;
-	private Integer created;
 }

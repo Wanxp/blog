@@ -1,7 +1,7 @@
 package com.wanxp.blog.service.impl;
 
 import com.wanxp.blog.repostory.AttachRepostory;
-import com.wanxp.blog.model.Attach;
+import com.wanxp.blog.model.entity.Attach;
 import com.wanxp.blog.model.dto.AttachDTO;
 import com.wanxp.blog.service.AttachService;
 import org.springframework.beans.BeanUtils;

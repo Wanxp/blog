@@ -1,6 +1,6 @@
 package com.wanxp.blog.repostory;
 
-import com.wanxp.blog.model.File;
+import com.wanxp.blog.model.entity.File;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;

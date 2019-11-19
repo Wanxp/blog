@@ -9,8 +9,7 @@ package com.wanxp.blog.model.dto;
  * @author John
  * 
  */
-@SuppressWarnings("serial")
-public class PlatformResult implements java.io.Serializable {
+public class PlatformResult {
 
 	private boolean success = true;
 

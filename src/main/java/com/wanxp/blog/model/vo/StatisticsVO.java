@@ -6,5 +6,5 @@ import lombok.Data;
 public class StatisticsVO {
     private Integer articles;
     private Integer comments;
-    private Integer attachs;
+    private Integer attaches;
 }

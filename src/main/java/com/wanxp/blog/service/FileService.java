@@ -1,6 +1,6 @@
 package com.wanxp.blog.service;
 
-import com.wanxp.blog.model.File;
+import com.wanxp.blog.model.entity.File;
 
 import java.util.List;
 import java.util.Optional;

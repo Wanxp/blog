@@ -1,7 +1,6 @@
 package com.wanxp.blog.controller;
 
-import com.wanxp.blog.model.File;
-import com.wanxp.blog.repostory.FileRepository;
+import com.wanxp.blog.model.entity.File;
 import com.wanxp.blog.service.FileService;
 import com.wanxp.blog.util.MD5Util;
 import org.bson.types.Binary;

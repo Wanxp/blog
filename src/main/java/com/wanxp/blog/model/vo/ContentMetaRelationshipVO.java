@@ -5,10 +5,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class ContentMetaRelationshipVO implements java.io.Serializable {
-
-	private static final long serialVersionUID = 5454155825314635342L;
-
+public class ContentMetaRelationshipVO {
 	private Integer id;
 	private Integer tenantId;
 	private Date addtime;			

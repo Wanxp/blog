@@ -1,5 +1,6 @@
 package com.wanxp.blog.controller;
 
+import com.wanxp.blog.model.dto.ContentDTO;
 import com.wanxp.blog.model.vo.StatisticsVO;
 import com.wanxp.blog.service.ContentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 import static com.wanxp.blog.constant.BlogConst.BLOG_TITLE;
 
@@ -20,7 +23,7 @@ public class AdminController {
 
     @GetMapping("index")
     public String index(Model model) {
-//        List<ContentDTO> contentDTOList = contentService.queryInPage();
+        List<ContentDTO> contentDTOList = contentService.queryInPage();
         model.addAttribute("title", BLOG_TITLE);
         model.addAttribute("statistics", new StatisticsVO(0, 0, 0));
         model.addAttribute("articles", null);

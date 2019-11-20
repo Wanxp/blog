@@ -18,7 +18,7 @@ public interface ContentService {
      *            分页帮助类
      * @return
      */
-    public Page queryInPage(Pageable pa);
+    Page queryInPage(Pageable pa);
 
 	/**
 	 * 获取Content数据表格
@@ -29,38 +29,47 @@ public interface ContentService {
 	 *            分页帮助类
 	 * @return
 	 */
-	public Page queryInPage(ContentDTO content, Pageable pa);
+    Page queryInPage(ContentDTO content, Pageable pa);
+
+    /**
+     * 获取Content数据
+     *
+     * @param authorId 参数
+     * @param pa       分页帮助类
+     * @return
+     */
+    Page listByAuthorInPage(Integer authorId, Pageable pa);
 
 	/**
 	 * 添加Content
 	 * 
 	 * @param content
 	 */
-	public void add(ContentDTO content);
+    void add(ContentDTO content);
 
-	/**
+    /**
 	 * 获得Content对象
 	 * 
 	 * @param id
 	 * @return
 	 */
-	public ContentDTO get(Integer id);
+    ContentDTO get(Integer id);
 
-	/**
+    /**
 	 * 修改Content
 	 * 
 	 * @param content
 	 */
-	public void edit(ContentDTO content);
+    void edit(ContentDTO content);
 
-	/**
+    /**
 	 * 删除Content
 	 * 
 	 * @param id
 	 */
-	public void delete(Integer id);
+    void delete(Integer id);
 
-	/**
+    /**
 	 * 获取带有评论的内容
 	 * @param id
 	 * @return

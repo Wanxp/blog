@@ -41,7 +41,13 @@ public class ContentServiceImpl implements ContentService {
 
     @Override
     public Page<ContentDTO> queryInPage(ContentDTO dto, Pageable pa) {
-        contentRepository.findAll(null, pa);
+        contentRepository.findByAttributeAndValue();
+        return null;
+    }
+
+    @Override
+    public Page<ContentDTO> listByAuthorInPage(Integer authorId, Pageable pa) {
+        contentRepository.findByAttributeAndValuePageable("author", authorId, pa);
         return null;
     }
 
@@ -76,7 +82,7 @@ public class ContentServiceImpl implements ContentService {
     @Override
     public ContentDTO getAndCommentPage(Integer id, Pageable pageable) {
         ContentDTO contentDTO = get(id);
-        //        contentDTO.setCommentPage(commentRepository.getCommentPageByContentIdPageable(contentDTO.getId(), pageable));
+        contentDTO.setCommentPage(commentRepository. (contentDTO.getId(), pageable))
         return contentDTO;
     }
 

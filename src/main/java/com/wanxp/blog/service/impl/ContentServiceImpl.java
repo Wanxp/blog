@@ -1,12 +1,14 @@
 package com.wanxp.blog.service.impl;
 
-import com.wanxp.blog.repostory.ContentRepository;
-import com.wanxp.blog.model.entity.Content;
 import com.wanxp.blog.model.dto.ContentDTO;
-import com.wanxp.blog.service.CommentService;
+import com.wanxp.blog.model.entity.Content;
+import com.wanxp.blog.repostory.CommentRepository;
+import com.wanxp.blog.repostory.ContentRepository;
 import com.wanxp.blog.service.ContentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,14 +20,14 @@ import static org.springframework.beans.BeanUtils.copyProperties;
 public class ContentServiceImpl implements ContentService {
 
 	@Autowired
-	private ContentRepository repostory;
+    private ContentRepository contentRepository;
 
 	@Autowired
-    private CommentService commentService;
+    private CommentRepository commentRepository;
 
     @Override
     public Page<ContentDTO> queryInPage(Pageable pa) {
-        Page<Content> p = repostory.findAll(pa);
+        Page<Content> p = contentRepository.findAll(pa);
         List<ContentDTO> ds = new ArrayList<>();
         if (p == null || p.getContent() == null)
             return null;
@@ -39,6 +41,7 @@ public class ContentServiceImpl implements ContentService {
 
     @Override
     public Page<ContentDTO> queryInPage(ContentDTO dto, Pageable pa) {
+        contentRepository.findAll(null, pa);
         return null;
     }
 
@@ -46,12 +49,12 @@ public class ContentServiceImpl implements ContentService {
     public void add(ContentDTO dto) {
         Content t = new Content();
         copyProperties(dto, t);
-        repostory.saveAndFlush(t);
+        contentRepository.saveAndFlush(t);
     }
 
     @Override
     public ContentDTO get(Integer id) {
-        Content t = repostory.getOne(id);
+        Content t = contentRepository.getOne(id);
         ContentDTO dto = new ContentDTO();
         if (t != null)
             copyProperties(t, dto);
@@ -62,20 +65,18 @@ public class ContentServiceImpl implements ContentService {
     public void edit(ContentDTO dto) {
         Content t = new Content();
         copyProperties(dto, t);
-        repostory.save(t);
+        contentRepository.save(t);
     }
 
     @Override
     public void delete(Integer id) {
-        repostory.deleteById(id);
+        contentRepository.deleteById(id);
     }
 
     @Override
     public ContentDTO getAndCommentPage(Integer id, Pageable pageable) {
         ContentDTO contentDTO = get(id);
-        if (contentDTO == null)
-            return null;
-        contentDTO.setCommentPage(commentService.getCommentPageByContentIdPageable(contentDTO.getId(), pageable));
+        //        contentDTO.setCommentPage(commentRepository.getCommentPageByContentIdPageable(contentDTO.getId(), pageable));
         return contentDTO;
     }
 

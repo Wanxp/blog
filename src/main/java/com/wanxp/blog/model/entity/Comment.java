@@ -8,6 +8,8 @@ package com.wanxp.blog.model.entity;
 import javax.persistence.*;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -61,5 +63,6 @@ public class Comment {
 	@OneToMany
 	@JoinColumn(name = "parent", unique = false, nullable = true, insertable = true, updatable = true)
     private Set<Comment> children;
+
 }
 

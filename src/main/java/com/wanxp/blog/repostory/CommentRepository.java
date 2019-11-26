@@ -21,6 +21,4 @@ public interface CommentRepository extends JpaRepository<Comment, Integer> {
 
     Page<Comment> findByCid(Integer id, Pageable pageable);
 
-    @Query("select c from Comment c where p.attributes[?1] = ?2")
-    List<Content> findByAttributeAndValue(String attribute, String value);
 }

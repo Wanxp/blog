@@ -35,10 +35,9 @@ public interface ContentService {
      * 获取Content数据
      *
      * @param authorId 参数
-     * @param pa       分页帮助类
      * @return
      */
-    Page listByAuthorInPage(Integer authorId, Pageable pa);
+    Page listByAuthor(Integer authorId);
 
 	/**
 	 * 添加Content

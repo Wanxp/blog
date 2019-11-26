@@ -11,6 +11,8 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @SuppressWarnings("serial")
 @Entity
@@ -61,5 +63,6 @@ public class Content {
 	private Integer allowPing;
 	@Column(name = "allow_feed", unique = false, nullable = true, insertable = true, updatable = true, length = 10)
 	private Integer allowFeed;
+
 }
 

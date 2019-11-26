@@ -1,10 +1,13 @@
 package com.wanxp.blog.service.impl;
 
+import com.wanxp.blog.model.dto.CommentDTO;
 import com.wanxp.blog.model.dto.ContentDTO;
+import com.wanxp.blog.model.entity.Comment;
 import com.wanxp.blog.model.entity.Content;
 import com.wanxp.blog.repostory.CommentRepository;
 import com.wanxp.blog.repostory.ContentRepository;
 import com.wanxp.blog.service.ContentService;
+import com.wanxp.blog.util.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -14,7 +17,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.springframework.beans.BeanUtils.copyProperties;
+import static com.wanxp.blog.util.BeanUtils.copyProperties;
+
 
 @Service
 public class ContentServiceImpl implements ContentService {
@@ -41,14 +45,14 @@ public class ContentServiceImpl implements ContentService {
 
     @Override
     public Page<ContentDTO> queryInPage(ContentDTO dto, Pageable pa) {
-        contentRepository.findByAttributeAndValue();
+//        contentRepository.findByAttributeAndValue();
         return null;
     }
 
     @Override
-    public Page<ContentDTO> listByAuthorInPage(Integer authorId, Pageable pa) {
-        contentRepository.findByAttributeAndValuePageable("author", authorId, pa);
-        return null;
+    public Page<ContentDTO> listByAuthor(Integer authorId) {
+        Page<Content> contentPage = contentRepository.findByAuthorId(authorId, Pageable.unpaged());
+        return contentPage.map(x-> BeanUtils.copyProperties(x, ContentDTO.class));
     }
 
     @Override
@@ -82,7 +86,8 @@ public class ContentServiceImpl implements ContentService {
     @Override
     public ContentDTO getAndCommentPage(Integer id, Pageable pageable) {
         ContentDTO contentDTO = get(id);
-        contentDTO.setCommentPage(commentRepository. (contentDTO.getId(), pageable))
+        Page<Comment> commentPage = commentRepository.findByCid(contentDTO.getId(), pageable);
+        contentDTO.setCommentPage(commentPage.map(x-> copyProperties(x, CommentDTO.class)));
         return contentDTO;
     }
 

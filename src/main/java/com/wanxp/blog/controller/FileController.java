@@ -29,8 +29,8 @@ import java.util.Optional;
 @RequestMapping("/file")
 public class FileController {
 
-    @Value("${server.address}")
-    private String serverAddress;
+    @Value("${file.server.host}")
+    private String fileServerHost;
 
     @Value("${server.port}")
     private String serverPort;
@@ -186,7 +186,7 @@ public class FileController {
         try {
             File f = transformFile(file);
             returnFile = fileService.saveFile(f);
-            String path = "//" + serverAddress + ":" + serverPort + "/file/view/" + returnFile.getId();
+            String path = "//" + fileServerHost + ":" + serverPort + "/file/view/" + returnFile.getId();
             return ResponseEntity.status(HttpStatus.OK).body(path);
 
         } catch (IOException | NoSuchAlgorithmException ex) {
@@ -209,7 +209,7 @@ public class FileController {
             File f = transformFile(file);
             f.setPath(filepath);
             returnFile = fileService.saveFile(f);
-            String path = "//" + serverAddress + ":" + serverPort + "/file/view/" + returnFile.getId();
+            String path = "//" + fileServerHost + ":" + serverPort + "/file/view/" + returnFile.getId();
             return ResponseEntity.status(HttpStatus.OK).body(path);
 
         } catch (IOException | NoSuchAlgorithmException ex) {

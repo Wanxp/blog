@@ -6,8 +6,8 @@ import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactor
 
 @Configuration
 public class RedisConfiguration {
-    @Bean
-    public LettuceConnectionFactory connectionFactory() {
-        return new LettuceConnectionFactory();
-    }
+//    @Bean
+//    public LettuceConnectionFactory connectionFactory() {
+//        return new LettuceConnectionFactory();
+//    }
 }

@@ -11,6 +11,7 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @SuppressWarnings("serial")
 @Entity
@@ -47,6 +48,5 @@ public class User {
 	private Integer logged;
 	@Column(name = "group_name", unique = false, nullable = true, insertable = true, updatable = true, length = 16)
 	private String groupName;
-
 }
 

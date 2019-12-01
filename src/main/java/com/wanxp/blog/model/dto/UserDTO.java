@@ -1,11 +1,16 @@
 package com.wanxp.blog.model.dto;
 
+import com.wanxp.blog.model.entity.Role;
 import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Data
-public class UserDTO  {
+public class UserDTO implements UserDetails {
 	private Integer id;
 	private Integer tenantId;
 	private Date addtime;			
@@ -19,4 +24,29 @@ public class UserDTO  {
 	private Integer activated;
 	private Integer logged;
 	private String groupName;
+	private Boolean accountNonExpired;
+	private Boolean accountNonLocked;
+	private Boolean credentialsNonExpired;//
+	private Boolean enabled; //是否激活
+	private List<RoleDTO> authorities;
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return accountNonExpired;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return accountNonLocked;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return credentialsNonExpired;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return enabled;
+	}
 }

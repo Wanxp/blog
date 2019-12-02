@@ -48,5 +48,9 @@ public class User {
 	private Integer logged;
 	@Column(name = "group_name", unique = false, nullable = true, insertable = true, updatable = true, length = 16)
 	private String groupName;
+	@ManyToMany
+	private List<Role> roleList;
+
+
 }
 

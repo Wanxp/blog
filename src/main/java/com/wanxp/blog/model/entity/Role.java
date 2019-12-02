@@ -32,8 +32,13 @@ public class Role{
     private String authority;
 
     @OneToMany
+    @JoinColumn(name = "parent_id")
     private List<Role> children;
 
     @ManyToOne
+    @JoinColumn(name = "parent_id")
     private Role parent;
+
+    @ManyToMany
+    private List<User> userList;
 }

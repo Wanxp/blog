@@ -7,8 +7,6 @@ import java.util.Collection;
 
 public class MyInvocationSecurityMetadataSourceService implements FilterInvocationSecurityMetadataSource {
 
-    private Map<String>
-
     @Override
     public Collection<ConfigAttribute> getAttributes(Object o) throws IllegalArgumentException {
         return null;

@@ -40,5 +40,6 @@ public class Role{
     private Role parent;
 
     @ManyToMany
+    @JoinColumn(name = "userList")
     private List<User> userList;
 }

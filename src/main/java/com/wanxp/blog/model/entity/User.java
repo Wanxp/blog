@@ -48,9 +48,11 @@ public class User {
 	private Integer logged;
 	@Column(name = "group_name", unique = false, nullable = true, insertable = true, updatable = true, length = 16)
 	private String groupName;
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
+//	@JoinTable(name = "user_role", joinColumns = {
+//			@JoinColumn(name = "user_id", referencedColumnName = "id")}, inverseJoinColumns = {
+//			@JoinColumn(name = "role_id", referencedColumnName = "id")})
 	private List<Role> roleList;
-
 
 }
 

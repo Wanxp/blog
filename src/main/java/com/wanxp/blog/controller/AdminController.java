@@ -6,6 +6,7 @@ import com.wanxp.blog.service.ContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +27,7 @@ public class AdminController {
 
     //TODO 权限
     @GetMapping("index")
+    @PreAuthorize("hasAnyAuthority(admin)")
     public String index(Model model, HttpServletRequest request) {
 
         Page<ContentDTO> contentDTOList = contentService.listByAuthor(1);

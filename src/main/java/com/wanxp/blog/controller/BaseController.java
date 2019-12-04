@@ -1,6 +1,5 @@
 package com.wanxp.blog.controller;
 
-import com.wanxp.blog.interceptor.TokenManage;
 import com.wanxp.blog.model.dto.ColumDTO;
 import com.wanxp.blog.model.dto.SessionInfo;
 import com.wanxp.blog.util.Objectx;
@@ -51,14 +50,10 @@ public abstract class BaseController extends Objectx {
 
 	protected static final String EX_0001 = "EX0001";
 	protected static final String SUCCESS_MESSAGE = "操作成功";
-	public static final String DEFAULT_TOKEN = TokenManage.DEFAULT_TOKEN;
 	public static final String MAP_ = "map_";
 	private String _publishSettingVal = "2"; //生产环境
 
 
-	@Autowired
-	private TokenManage tokenManage;
-	
 	@InitBinder
 	public void initBinder(ServletRequestDataBinder binder) {
 		/**
@@ -259,8 +254,7 @@ public abstract class BaseController extends Objectx {
 	}
 
 	protected SessionInfo getSessionInfo(HttpServletRequest request){
-		SessionInfo s = tokenManage.getSessionInfo(request);
-		return s;
+	    return null;
 	}
 }
  

@@ -21,12 +21,12 @@ import java.util.List;
 @Data
 public class User {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false, length = 10)
 	private Integer id;
-	@Column(name = "tenant_id", unique = false, nullable = true, insertable = true, updatable = true, length = 10)
+	@Column(name = "tenant_id", unique = false, nullable = false, insertable = true, updatable = true, length = 10)
 	private Integer tenantId;
-	@Column(name = "addtime", unique = false, nullable = false, insertable = true, updatable = true, length = 19)
+	@Column(name = "addtime", unique = false, nullable = false, insertable = true, updatable = false, length = 19)
 	private Date addtime;
 	@Column(name = "updatetime", unique = false, nullable = false, insertable = true, updatable = true, length = 19)
 	private Date updatetime;
@@ -36,8 +36,10 @@ public class User {
 	private String username;
 	@Column(name = "password", unique = false, nullable = false, insertable = true, updatable = true, length = 64)
 	private String password;
-	@Column(name = "email", unique = false, nullable = true, insertable = true, updatable = true, length = 100)
+	@Column(name = "email", unique = true, nullable = false, insertable = true, updatable = true, length = 100)
 	private String email;
+	@Column(name = "phone", unique = true, nullable = true, insertable = true, updatable = true, length = 100)
+	private String phone;
 	@Column(name = "home_url", unique = false, nullable = true, insertable = true, updatable = true, length = 255)
 	private String homeUrl;
 	@Column(name = "screen_name", unique = false, nullable = true, insertable = true, updatable = true, length = 100)

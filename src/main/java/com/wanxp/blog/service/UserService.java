@@ -13,49 +13,40 @@ import org.springframework.data.domain.Pageable;
 public interface UserService {
 
 	/**
-	 * 获取User数据表格
-	 * 
-	 * @param user
-	 *            参数
-	 * @param pa
-	 *            分页帮助类
-	 * @return
-	 */
-	public Page queryInPage(UserDTO user, Pageable pa);
+     * 获取User数据表格
+     *
+     * @param user 参数
+     * @param pa   分页帮助类
+     * @return
+     */
+    Page queryInPage(UserDTO user, Pageable pa);
 
 	/**
 	 * 添加User
-	 * 
-	 * @param user
-	 */
-	public void add(UserDTO user);
+     *
+     * @param user
+     */
+    void add(UserDTO user);
 
-	/**
-	 * 获得User对象
-	 * 
-	 * @param id
-	 * @return
-	 */
-	public UserDTO get(Integer id);
+    /**
+     * 获得User对象
+     *
+     * @param id
+     * @return
+     */
+    UserDTO get(Integer id);
 
-	/**
-	 * 修改User
-	 * 
-	 * @param user
-	 */
-	public void edit(UserDTO user);
+    /**
+     * 修改User
+     *
+     * @param user
+     */
+    void edit(UserDTO user);
 
-	/**
-	 * 删除User
-	 * 
-	 * @param id
-	 */
-	public void delete(Integer id);
-
-	/**
-	 * 登陆
-	 * @param userDTO
-	 * @return
-	 */
-    UserDTO login(UserDTO userDTO);
+    /**
+     * 删除User
+     *
+     * @param id
+     */
+    void delete(Integer id);
 }

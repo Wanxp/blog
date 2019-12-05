@@ -7,15 +7,18 @@ import com.wanxp.blog.service.AccountService;
 import com.wanxp.blog.util.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.context.ApplicationContextException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
 import static com.wanxp.blog.constant.CacheKey.USE_USER_NAME;
 
+@Service
 public class AccountServiceImpl implements AccountService, UserDetailsService {
 
     @Autowired
@@ -31,7 +34,7 @@ public class AccountServiceImpl implements AccountService, UserDetailsService {
     @Override
     @Cacheable(value = USE_USER_NAME, key = "#username")
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsernameOrEmailOrPhone(username);
+        User user = userRepository.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException("user : " + username + " not found ");
         }
@@ -46,12 +49,13 @@ public class AccountServiceImpl implements AccountService, UserDetailsService {
      */
     public UserDetails register(UserDTO userDTO) {
         checkUserExist(userDTO);
+        return null;
     }
 
     protected void checkUserExist(UserDTO userDTO) {
         List<User> users = userRepository.findUsersByUsernameOrEmailOrPhone(userDTO);
         if (!CollectionUtils.isEmpty(users)) {
-            throw new
+            throw new ApplicationContextException("use is exist");
         }
     }
 }

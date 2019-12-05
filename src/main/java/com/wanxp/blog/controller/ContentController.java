@@ -127,7 +127,6 @@ public class ContentController extends BaseController {
 		UserDTO userDTO = new UserDTO();
 		userDTO.setUsername("wanxp123456");
 		userDTO.setPassword("123456789");
-		userDTO = userService.login(userDTO);
 		session.setAttribute("login_user", userDTO);
 
 		ContentDTO content = contentService.getAndCommentPage(id, PageRequest.of(0, 6, Sort.Direction.DESC, "updatetime"));

@@ -40,7 +40,6 @@ public class LoginController {
         PlatformResult json = new PlatformResult();
         UserDTO userDTO = new UserDTO();
         MyBeanUtils.copyProperties(user, userDTO);
-        userDTO = userService.login(userDTO) ;
         if (userDTO == null) {
             json.setMsg("username not exist or password wrong");
             json.setSuccess(false);

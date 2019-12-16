@@ -1,21 +1,12 @@
 package com.wanxp.blog.model.dto;
 
-import com.wanxp.blog.model.entity.Role;
 import lombok.Data;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 @Data
-public class UserDTO implements UserDetails {
-	private Integer id;
-	private Integer tenantId;
-	private Date addtime;			
-	private Date updatetime;			
-	private Boolean isdeleted;
+public class UserDTO extends AbstractDTO implements UserDetails {
 	private String username;
 	private String password;
 	private String email;

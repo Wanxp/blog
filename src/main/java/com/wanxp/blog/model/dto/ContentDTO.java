@@ -3,15 +3,8 @@ package com.wanxp.blog.model.dto;
 import lombok.Data;
 import org.springframework.data.domain.Page;
 
-import java.util.Date;
-
 @Data
-public class ContentDTO {
-	private Integer id;
-	private Integer tenantId;
-	private Date addtime;
-	private Date updatetime;
-	private Boolean isdeleted;
+public class ContentDTO extends AbstractDTO {
 	private String title;
 	private String slug;
 	private String thumbImg;

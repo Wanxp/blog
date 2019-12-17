@@ -2,15 +2,8 @@ package com.wanxp.blog.model.dto;
 
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
-public class AttachDTO {
-	private Integer id;
-	private Integer tenantId;
-	private Date addtime;
-	private Date updatetime;
-	private Boolean isdeleted;
+public class AttachDTO extends AbstractDTO {
 	private Integer cid;
 	private String author;
 	private Integer authorId;

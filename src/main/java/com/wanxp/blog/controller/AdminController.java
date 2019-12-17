@@ -25,7 +25,6 @@ public class AdminController {
     @Autowired
     private ContentService contentService;
 
-    //TODO 权限
     @GetMapping("index")
     @PreAuthorize("hasAnyAuthority(admin)")
     public String index(Model model, HttpServletRequest request) {

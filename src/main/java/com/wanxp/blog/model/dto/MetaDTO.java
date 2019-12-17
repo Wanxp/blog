@@ -2,15 +2,8 @@ package com.wanxp.blog.model.dto;
 
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
-public class MetaDTO implements java.io.Serializable {
-	private Integer id;
-	private Integer tenantId;
-	private Date addtime;			
-	private Date updatetime;			
-	private Boolean isdeleted;
+public class MetaDTO extends AbstractDTO {
 	private String name;
 	private String slug;
 	private String type;

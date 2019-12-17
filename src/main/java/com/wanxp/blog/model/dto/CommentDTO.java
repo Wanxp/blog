@@ -7,12 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 @Data
-public class CommentDTO{
-	private Integer id;
-	private Integer tenantId;
-	private Date addtime;			
-	private Date updatetime;			
-	private Boolean isdeleted;
+public class CommentDTO {
 	private Integer cid;
 	private String author;
 	private Integer authorId;

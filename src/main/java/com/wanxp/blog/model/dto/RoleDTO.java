@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-public class RoleDTO implements GrantedAuthority {
+public class RoleDTO extends AbstractDTO implements GrantedAuthority {
     private Integer id;
     private Integer tenantId;
     private Date addtime;

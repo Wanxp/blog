@@ -38,6 +38,10 @@ public class User extends AbstractEntity{
 	private Integer logged;
 	@Column(name = "group_name", unique = false, nullable = true, insertable = true, updatable = true, length = 16)
 	private String groupName;
+	@Column(name = "expired_time", unique = false, nullable = true, insertable = true, updatable = true)
+	private Date expiredTime;
+	@Column(name = "enabled", unique = false, nullable = true, insertable = true, updatable = true)
+	private Boolean enabled;
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "user_role", joinColumns = {
 			@JoinColumn(name = "user_id", referencedColumnName = "id")}, inverseJoinColumns = {

@@ -5,6 +5,7 @@ import com.wanxp.blog.model.entity.User;
 import com.wanxp.blog.repostory.UserRepository;
 import com.wanxp.blog.service.AccountService;
 import com.wanxp.blog.util.BeanUtils;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.ApplicationContextException;
@@ -32,13 +33,18 @@ public class AccountServiceImpl implements AccountService, UserDetailsService {
      * @throws UsernameNotFoundException
      */
     @Override
-    @Cacheable(value = USE_USER_NAME, key = "#username")
+    @Cacheable(value = USE_USER_NAME, key = "#username", unless = "#result=null")
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException("user : " + username + " not found ");
         }
-        return BeanUtils.copyProperties(user, UserDTO.class);
+        UserDTO userDTO = BeanUtils.copyProperties(user, UserDTO.class);
+        userDTO.setAccountNonExpired(user.getExpiredTime() == null || !DateTime.now().isAfter(user.getExpiredTime().getTime()));
+        userDTO.setAccountNonLocked(true);
+        userDTO.setCredentialsNonExpired(user.getExpiredTime() == null || !DateTime.now().isAfter(user.getExpiredTime().getTime()));
+        userDTO.setEnabled(user.getEnabled() == null || user.getEnabled());
+        return userDTO;
     }
 
     /**

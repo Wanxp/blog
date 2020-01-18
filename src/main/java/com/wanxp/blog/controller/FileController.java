@@ -3,6 +3,8 @@ package com.wanxp.blog.controller;
 import com.wanxp.blog.model.entity.File;
 import com.wanxp.blog.service.FileService;
 import com.wanxp.blog.util.MD5Util;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,6 +29,7 @@ import java.util.Optional;
  */
 @Controller
 @RequestMapping("/file")
+@Api(tags = "file")
 public class FileController {
 
     @Value("${file.server.host}")
@@ -43,6 +46,7 @@ public class FileController {
      * @return
      */
     @GetMapping("/manager")
+    @ApiOperation("manager")
     public String manager(Model model) {
         List<File> files = fileService.listFilesByPage(0, 10);
         model.addAttribute("message", "welcome to file manager!");
@@ -54,6 +58,7 @@ public class FileController {
      * @return
      */
     @GetMapping("/")
+    @ApiOperation("home")
     public String home(Model model) {
         List<File> files = fileService.listFilesByPage(0, 10);
         model.addAttribute("message", "welcome to file manager!");
@@ -71,6 +76,7 @@ public class FileController {
      */
     @GetMapping("/{id}")
     @ResponseBody
+    @ApiOperation("fileInfo")
     public ResponseEntity<Object> serveFile(@PathVariable String id) throws UnsupportedEncodingException {
 
         Optional<File> file = fileService.getFileById(id);
@@ -94,6 +100,7 @@ public class FileController {
      */
     @GetMapping("/image/user/head/{fileName}/{size}")
     @ResponseBody
+    @ApiOperation("image")
     public ResponseEntity<Object> image(@PathVariable(name = "fileName") String fileName,
                                         @PathVariable(name = "size") String size) throws UnsupportedEncodingException {
 
@@ -119,6 +126,7 @@ public class FileController {
      */
     @GetMapping("/files/{pageIndex}/{pageSize}")
     @ResponseBody
+    @ApiOperation("files")
     public List<File> listFilesByPage(@PathVariable int pageIndex, @PathVariable int pageSize) {
         return fileService.listFilesByPage(pageIndex, pageSize);
     }
@@ -132,6 +140,7 @@ public class FileController {
      */
     @GetMapping("/view/{id}")
     @ResponseBody
+    @ApiOperation("display")
     public ResponseEntity<Object> serveFileOnline(@PathVariable String id) {
 
         Optional<File> file = fileService.getFileById(id);
@@ -156,6 +165,7 @@ public class FileController {
      * @return
      */
     @PostMapping("/")
+    @ApiOperation("upload-page")
     public String handleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
 
         try {
@@ -181,6 +191,7 @@ public class FileController {
      */
     @PostMapping("/upload")
     @ResponseBody
+    @ApiOperation("upload-file")
     public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file) {
         File returnFile = null;
         try {
@@ -203,6 +214,7 @@ public class FileController {
      * @return
      */
     @PostMapping("/image")
+    @ApiOperation("upload-image")
     public ResponseEntity<String> headUpload(@RequestParam("filepath") String filepath, @RequestParam("file") MultipartFile file) {
         File returnFile = null;
         try {
@@ -228,6 +240,7 @@ public class FileController {
      */
     @DeleteMapping("/{id}")
     @ResponseBody
+    @ApiOperation("delete")
     public ResponseEntity<String> deleteFile(@PathVariable String id) {
 
         try {

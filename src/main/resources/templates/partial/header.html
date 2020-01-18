@@ -36,7 +36,8 @@
                 <img src="/img/logo.png" th:alt="${title}"/>
         </a>
         <div class="navbar-menu">
-            <a href="/login">登录</a>
+            <a th:if="{#request.getRemoteUser() != null}" href="/admin/index" th:text="me"></a>
+            <a th:unless="{#request.getRemoteUser() != null}" href="/login" th:text="login"></a>
             <a href="/index/archives">归档</a>
             <a href="/index/links">友链</a>
             <a href="/index/about">关于</a>
